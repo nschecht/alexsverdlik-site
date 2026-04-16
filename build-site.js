@@ -314,19 +314,19 @@ function buildChatJS() {
   var PH_CLEAN = PHONE.replace(/[^0-9]/g, "");
   return '(function(){' +
   'var PH="' + PHONE + '";' +
-  'var SYS="You are Alex Sverdlik\'s AI assistant on his luxury real estate website. Help visitors learn about SE Florida real estate.\\n\\nABOUT ALEX: Broker Associate, ZenQuest Realty, Coral Springs FL. 20+ years. Smith Barney, Shipwire.com (Silicon Valley), top Zip Realty producer La Canada/LA. Fluent English/Russian. Wife Dr. Naomi Schechter, radiation oncologist Delray Beach. Daughters: Pinecrest to Michigan Ross, UF premed. Eldest to Princeton. Phone: ' + PHONE + '.\\n\\nAREAS: Parkland, Boca Raton, Coral Springs, Fort Lauderdale, Lighthouse Point, Hillsboro Mile, Deerfield Beach, Highland Beach.\\n\\nSPECIALTIES: Luxury $1M-$10M+, waterfront, NE and CA relocators, Russian-speaking, international investors, 1031 exchanges, medical pros.\\n\\nNEIGHBORHOODS: Heron Bay ($800K-$2.5M), MiraLago ($1.2M-$3.5M), Parkland Golf ($1.5M-$5M+), Watercress ($700K-$1.8M), BBB Ranches ($1.5M-$5M+), Hillsboro Mile ($5M-$25M+).\\n\\nCOMMUNITY: Walking-distance synagogues, eruv, kosher restaurants in Parkland/Boca/Coral Springs, Jewish day schools.\\n\\nBEHAVIOR: Warm, never pushy. 2-4 sentences. Russian if asked. Learn name, interest, timeline, budget naturally through conversation. Never invent listings.\\n\\nLEAD CAPTURE (CRITICAL): As soon as the visitor has shared their NAME and (EMAIL or PHONE), you MUST append a lead marker at the very end of that response, AFTER your normal reply. Do NOT filter by budget, timeline, or seeming seriousness — Alex wants ALL real leads, including lower price points, long timelines, and casual lookers. He has a referral network and partners for different price tiers. The ONLY reason to NOT emit the marker is if the person is obviously testing, joking, or a spammer (e.g. fake names, inappropriate content). If unsure, emit the marker — Alex would rather see it than miss it.\\n\\nMARKER FORMAT (EXACTLY): [LEAD:{\\"name\\":\\"...\\",\\"email\\":\\"...\\",\\"phone\\":\\"...\\",\\"interest\\":\\"...\\",\\"budget\\":\\"...\\",\\"timeline\\":\\"...\\",\\"location\\":\\"...\\",\\"buyerType\\":\\"...\\",\\"financial\\":\\"...\\",\\"lang\\":\\"English\\"}] — Use empty strings for fields you do not yet know. Emit the marker ONCE per conversation (the first time name + contact appear). Put it on its own line after your normal reply. The visitor never sees the marker — it is stripped before display. Do not mention it. Do not wrap it in code blocks or quotes. If new qualifying info comes up AFTER the first marker (e.g. they share budget later), do not emit a second one.";' +
+  'var SYS="You are Alex Sverdlik\'s AI assistant on his luxury real estate website. Help visitors learn about SE Florida real estate.\\n\\nABOUT ALEX: Broker Associate, ZenQuest Realty, Coral Springs FL. 20+ years. Smith Barney, Shipwire.com (Silicon Valley), top Zip Realty producer La Canada/LA. Fluent English/Russian. Wife Dr. Naomi Schechter, radiation oncologist Delray Beach. Daughters: Pinecrest to Michigan Ross, UF premed. Eldest to Princeton. Phone: ' + PHONE + '.\\n\\nAREAS: Parkland, Boca Raton, Coral Springs, Fort Lauderdale, Lighthouse Point, Hillsboro Mile, Deerfield Beach, Highland Beach.\\n\\nSPECIALTIES: Luxury $1M-$10M+, waterfront, NE and CA relocators, Russian-speaking, international investors, 1031 exchanges, medical pros.\\n\\nNEIGHBORHOODS: Heron Bay ($800K-$2.5M), MiraLago ($1.2M-$3.5M), Parkland Golf ($1.5M-$5M+), Watercress ($700K-$1.8M), BBB Ranches ($1.5M-$5M+), Hillsboro Mile ($5M-$25M+).\\n\\nCOMMUNITY: Walking-distance synagogues, eruv, kosher restaurants in Parkland/Boca/Coral Springs, Jewish day schools.\\n\\nBEHAVIOR: Warm, never pushy. 2-4 sentences. Russian if asked. Learn name, interest, timeline, budget naturally through conversation. Never invent listings.\\n\\nLEAD CAPTURE (CRITICAL): As soon as the visitor has shared their NAME and (EMAIL or PHONE), you MUST append a lead marker at the very end of that response, AFTER your normal reply. Do NOT filter by budget, timeline, or seeming seriousness — Alex wants ALL real leads, including lower price points, long timelines, and casual lookers. He has a referral network and partners for different price tiers. The ONLY reason to NOT emit the marker is if the person is obviously testing, joking, or a spammer (e.g. fake names, inappropriate content). If unsure, emit the marker — Alex would rather see it than miss it.\\n\\nMARKER FORMAT (EXACTLY): [LEAD:{\\"name\\":\\"...\\",\\"email\\":\\"...\\",\\"phone\\":\\"...\\",\\"interest\\":\\"...\\",\\"budget\\":\\"...\\",\\"timeline\\":\\"...\\",\\"location\\":\\"...\\",\\"buyerType\\":\\"...\\",\\"financial\\":\\"...\\",\\"lang\\":\\"English\\"}] — Use empty strings for fields you do not yet know. Emit the marker AT LEAST ONCE when name + contact first appear. You MAY emit it again in later turns if new details emerge (e.g. visitor shares budget mid-conversation) — the system handles duplicates cleanly. Put the marker on its own line after your normal reply. The visitor never sees it — it is stripped before display. Do not mention it. Do not wrap it in code blocks or quotes.";' +
   'var msgs=[{r:"a",t:"Hi! I\'m Alex\'s assistant. Curious about Parkland, waterfront homes, or relocating to SE Florida? Ask me anything!"}];' +
   'var open=false,busy=false;' +
   'var sty=document.createElement("style");sty.textContent="@keyframes asBounce{to{transform:translateY(-4px);opacity:.4}}";document.head.appendChild(sty);' +
   'function render(){' +
   'var w=document.getElementById("asChatWrap");if(!w)return;w.innerHTML="";' +
   'var b=document.createElement("button");b.style.cssText="position:fixed;bottom:20px;right:20px;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#c9a96e,#e0c98f);border:none;cursor:pointer;box-shadow:0 4px 16px rgba(201,169,110,.4);z-index:9999;font-family:Playfair Display,serif;font-size:20px;font-weight:700;color:#1a1f2e;transition:transform .2s";' +
-  'b.textContent=open?"\u2715":"AS";b.onclick=function(){open=!open;render();};w.appendChild(b);' +
+  'b.textContent=open?"\u2715":"AS";b.onclick=function(){if(open)sendFinalLead();open=!open;render();};w.appendChild(b);' +
   'if(!open)return;' +
   'var win=document.createElement("div");win.style.cssText="position:fixed;bottom:88px;right:20px;width:min(370px,calc(100vw - 40px));height:min(500px,calc(100vh - 120px));background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.15);display:flex;flex-direction:column;overflow:hidden;z-index:9998;font-family:DM Sans,sans-serif";' +
   'var hd=document.createElement("div");hd.style.cssText="background:#1a1f2e;padding:14px 18px;display:flex;align-items:center;gap:10px";' +
   'hd.innerHTML=\'<div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#c9a96e,#e0c98f);display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:15px;font-weight:700;color:#1a1f2e">AS</div><div style="flex:1"><div style="font-weight:600;color:#f5f0e8;font-size:14px">Alex Sverdlik</div><div style="font-size:11px;color:#c9a96e">\u25cf Online</div></div>\';' +
-  'var cb=document.createElement("button");cb.style.cssText="background:none;border:none;color:#6b7394;font-size:18px;cursor:pointer";cb.textContent="\u2715";cb.onclick=function(){open=false;render();};hd.appendChild(cb);win.appendChild(hd);' +
+  'var cb=document.createElement("button");cb.style.cssText="background:none;border:none;color:#6b7394;font-size:18px;cursor:pointer";cb.textContent="\u2715";cb.onclick=function(){sendFinalLead();open=false;render();};hd.appendChild(cb);win.appendChild(hd);' +
   'var md=document.createElement("div");md.id="asChatMsgs";md.style.cssText="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:#f8f7f4";' +
   'msgs.forEach(function(m){var d=document.createElement("div");d.style.cssText="display:flex;justify-content:"+(m.r==="u"?"flex-end":"flex-start");var p=document.createElement("div");p.style.cssText="max-width:82%;padding:9px 13px;font-size:14px;line-height:1.6;font-weight:300;"+(m.r==="u"?"border-radius:14px 14px 3px 14px;background:#1a1f2e;color:#f5f0e8":"border-radius:14px 14px 14px 3px;background:#fff;color:#2d3142;box-shadow:0 1px 3px rgba(0,0,0,.05)");p.textContent=m.t;d.appendChild(p);md.appendChild(d);});' +
   'if(busy){var dt=document.createElement("div");dt.innerHTML=\'<div style="padding:10px 16px;background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.05);display:inline-flex;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#6b7394;animation:asBounce .6s 0s infinite alternate;display:inline-block"></span><span style="width:6px;height:6px;border-radius:50%;background:#6b7394;animation:asBounce .6s .15s infinite alternate;display:inline-block"></span><span style="width:6px;height:6px;border-radius:50%;background:#6b7394;animation:asBounce .6s .3s infinite alternate;display:inline-block"></span></div>\';md.appendChild(dt);}' +
@@ -344,20 +344,22 @@ function buildChatJS() {
   '}' +
   'var NOTIFY="' + CONFIG.notifyEmail + '";' +
   'var SIG="\\n\\nBest regards,\\nAlex Sverdlik\\nBroker Associate | ZenQuest Realty\\nCoral Springs, FL\\n' + PHONE + '\\nasverdlik@gmail.com";' +
-  // notifyLead: posts a structured lead to Netlify Forms (form name: "chat-leads")
-  // Netlify sends an email notification to Alex (configured in Netlify dashboard)
-  // Full transcript + reply-draft are included so Alex has one-click reply
-  'function notifyLead(ld){' +
+  // Lead notification system:
+  //   - leadSent: true after initial "hi, Alex got a lead" email fires
+  //   - leadData: latest merged lead info (keeps track of info added AFTER initial capture)
+  //   - finalSent: true after the "final wrap-up" email fires
+  //   - Initial email fires on first qualification; Final email fires on chat close / page unload / inactivity
+  'var leadSent=false;var finalSent=false;var leadData=null;var idleTimer=null;' +
+  // Build the URL-encoded body for a Netlify Forms POST with the current transcript + lead info
+  'function buildLeadBody(ld,stage){' +
   'var conv=msgs.map(function(m){return(m.r==="u"?"Visitor: ":"Alex AI: ")+m.t;}).join("\\n");' +
   'var fname=(ld.name||"").split(" ")[0]||"there";' +
   'var draft="Hi "+fname+",\\n\\nThank you for reaching out! I enjoyed our chat and would love to help you with your real estate search"+(ld.interest?(" -- especially regarding "+ld.interest):"")+"."' +
   '+"\\n\\nWould love to learn more about what you are looking for and share some options that might be a great fit. Would you have time for a quick call this week?"' +
   '+"\\n\\nNo pressure at all -- just a friendly conversation to see how I can help."+SIG;' +
-  // Build URL-encoded body for Netlify Forms
-  // Every field name must match an <input name=""> in the hidden form in the footer
   'var params=new URLSearchParams();' +
   'params.append("form-name","chat-leads");' +
-  'params.append("name",ld.name||"Website Visitor");' +
+  'params.append("name",(ld.name||"Website Visitor")+(stage==="final"?" [FINAL]":""));' +
   'params.append("email",ld.email||"");' +
   'params.append("phone",ld.phone||"");' +
   'params.append("language",ld.lang||"English");' +
@@ -369,16 +371,44 @@ function buildChatJS() {
   'params.append("financial",ld.financial||"Not discussed");' +
   'params.append("transcript",conv);' +
   'params.append("reply-draft",draft);' +
-  'fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:params.toString()}).catch(function(){});' +
+  'return params.toString();' +
   '}' +
-  'function sendMsg(txt){msgs.push({r:"u",t:txt});busy=true;render();' +
+  // Initial fire: called when AI emits the first [LEAD:...] marker with qualifying info
+  'function notifyLead(ld){' +
+  'leadData=ld;' +
+  'if(leadSent)return;' +   // Silently ignore repeat markers — the final-send path handles updates
+  'leadSent=true;' +
+  'fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:buildLeadBody(ld,"initial"),keepalive:true}).catch(function(){});' +
+  '}' +
+  // Merge new lead info into existing leadData (new non-empty fields overwrite old ones)
+  'function mergeLead(ld){' +
+  'if(!leadData){leadData=ld;return;}' +
+  'Object.keys(ld).forEach(function(k){if(ld[k])leadData[k]=ld[k];});' +
+  '}' +
+  // Final fire: called on chat close / unload / inactivity. Sends complete updated transcript.
+  'function sendFinalLead(){' +
+  'if(!leadSent||finalSent||!leadData)return;' +    // No initial capture? Nothing to finalize.
+  'if(msgs.length<=3)return;' +   // Don't bother if conversation barely continued past capture
+  'finalSent=true;' +
+  // keepalive:true is essential — allows the request to complete even as the page unloads
+  'fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:buildLeadBody(leadData,"final"),keepalive:true}).catch(function(){});' +
+  '}' +
+  // Reset inactivity timer — call on every user message / AI response
+  'function touchIdle(){' +
+  'if(idleTimer)clearTimeout(idleTimer);' +
+  'idleTimer=setTimeout(sendFinalLead,120000);' +   // 2 minutes of no activity = conversation ended
+  '}' +
+  // Fire final summary when user navigates away or closes the tab
+  'window.addEventListener("beforeunload",sendFinalLead);' +
+  'window.addEventListener("pagehide",sendFinalLead);' +
+  'function sendMsg(txt){msgs.push({r:"u",t:txt});busy=true;touchIdle();render();' +
   'var apiMsgs=msgs.map(function(m){return{role:m.r==="a"?"assistant":"user",content:m.t};});' +
   'fetch("/.netlify/functions/api",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:SYS,messages:apiMsgs,max_tokens:400})})' +
   '.then(function(r){return r.json();}).then(function(data){var text=(data.content||[]).map(function(c){return c.text||"";}).join("")||"Having trouble. Call Alex at "+PH+".";' +
-  // Parse lead marker: find [LEAD:{...}] with balanced braces, parse JSON, notify, then strip from visible text
+  // Parse lead marker: find [LEAD:{...}], parse JSON, merge into leadData, fire initial if not yet sent
   'var lm=text.match(/\\[LEAD:(\\{[^\\]]*\\})\\]/);' +
-  'if(lm){try{var ld=JSON.parse(lm[1]);notifyLead(ld);}catch(e){console.error("Lead parse failed:",e,lm[1]);}text=text.replace(/\\[LEAD:[^\\]]*\\]/g,"").trim();}' +
-  'msgs.push({r:"a",t:text});busy=false;render();})' +
+  'if(lm){try{var ld=JSON.parse(lm[1]);mergeLead(ld);notifyLead(leadData);}catch(e){console.error("Lead parse failed:",e,lm[1]);}text=text.replace(/\\[LEAD:[^\\]]*\\]/g,"").trim();}' +
+  'msgs.push({r:"a",t:text});busy=false;touchIdle();render();})' +
   '.catch(function(){msgs.push({r:"a",t:"Sorry, having trouble. Call Alex at "+PH+"."});busy=false;render();});}' +
   'render();})();';
 }
