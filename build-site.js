@@ -315,13 +315,17 @@ function buildChatJS() {
   return '(function(){' +
   'var PH="' + PHONE + '";' +
   'var SYS="You are Alex Sverdlik\'s AI assistant on his luxury real estate website. Help visitors learn about SE Florida real estate.\\n\\nABOUT ALEX: Broker Associate, ZenQuest Realty, Coral Springs FL. 20+ years. Smith Barney, Shipwire.com (Silicon Valley), top Zip Realty producer La Canada/LA. Fluent English/Russian. Wife Dr. Naomi Schechter, radiation oncologist Delray Beach. Daughters: Pinecrest to Michigan Ross, UF premed. Eldest to Princeton. Phone: ' + PHONE + '.\\n\\nAREAS: Parkland, Boca Raton, Coral Springs, Fort Lauderdale, Lighthouse Point, Hillsboro Mile, Deerfield Beach, Highland Beach.\\n\\nSPECIALTIES: Luxury $1M-$10M+, waterfront, NE and CA relocators, Russian-speaking, international investors, 1031 exchanges, medical pros.\\n\\nNEIGHBORHOODS: Heron Bay ($800K-$2.5M), MiraLago ($1.2M-$3.5M), Parkland Golf ($1.5M-$5M+), Watercress ($700K-$1.8M), BBB Ranches ($1.5M-$5M+), Hillsboro Mile ($5M-$25M+).\\n\\nCOMMUNITY: Walking-distance synagogues, eruv, kosher restaurants in Parkland/Boca/Coral Springs, Jewish day schools.\\n\\nBEHAVIOR: Warm, never pushy. 2-4 sentences. Russian if asked. Learn name, interest, timeline, budget naturally through conversation. Never invent listings.\\n\\nLEAD CAPTURE (CRITICAL): As soon as the visitor has shared their NAME and (EMAIL or PHONE), you MUST append a lead marker at the very end of that response, AFTER your normal reply. Do NOT filter by budget, timeline, or seeming seriousness — Alex wants ALL real leads, including lower price points, long timelines, and casual lookers. He has a referral network and partners for different price tiers. The ONLY reason to NOT emit the marker is if the person is obviously testing, joking, or a spammer (e.g. fake names, inappropriate content). If unsure, emit the marker — Alex would rather see it than miss it.\\n\\nMARKER FORMAT (EXACTLY): [LEAD:{\\"name\\":\\"...\\",\\"email\\":\\"...\\",\\"phone\\":\\"...\\",\\"interest\\":\\"...\\",\\"budget\\":\\"...\\",\\"timeline\\":\\"...\\",\\"location\\":\\"...\\",\\"buyerType\\":\\"...\\",\\"financial\\":\\"...\\",\\"lang\\":\\"English\\"}] — Use empty strings for fields you do not yet know. Emit the marker AT LEAST ONCE when name + contact first appear. You MAY emit it again in later turns if new details emerge (e.g. visitor shares budget mid-conversation) — the system handles duplicates cleanly. Put the marker on its own line after your normal reply. The visitor never sees it — it is stripped before display. Do not mention it. Do not wrap it in code blocks or quotes.";' +
-  'var msgs=[{r:"a",t:"Hi! I\'m Alex\'s assistant. Curious about Parkland, waterfront homes, or relocating to SE Florida? Ask me anything!"}];' +
+  'var GREETING={r:"a",t:"Hi! I\'m Alex\'s assistant. Curious about Parkland, waterfront homes, or relocating to SE Florida? Ask me anything!"};' +
+  'var msgs=[GREETING];' +
   'var open=false,busy=false;' +
   'var sty=document.createElement("style");sty.textContent="@keyframes asBounce{to{transform:translateY(-4px);opacity:.4}}";document.head.appendChild(sty);' +
   'function render(){' +
   'var w=document.getElementById("asChatWrap");if(!w)return;w.innerHTML="";' +
   'var b=document.createElement("button");b.style.cssText="position:fixed;bottom:20px;right:20px;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#c9a96e,#e0c98f);border:none;cursor:pointer;box-shadow:0 4px 16px rgba(201,169,110,.4);z-index:9999;font-family:Playfair Display,serif;font-size:20px;font-weight:700;color:#1a1f2e;transition:transform .2s";' +
-  'b.textContent=open?"\u2715":"AS";b.onclick=function(){if(open)sendFinalLead();open=!open;render();};w.appendChild(b);' +
+  'b.textContent=open?"\u2715":"AS";b.onclick=function(){' +
+  'if(open){sendFinalLead();open=false;}' +
+  'else{if(msgs.length>1)resetChat();open=true;}' +
+  'render();};w.appendChild(b);' +
   'if(!open)return;' +
   'var win=document.createElement("div");win.style.cssText="position:fixed;bottom:88px;right:20px;width:min(370px,calc(100vw - 40px));height:min(500px,calc(100vh - 120px));background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.15);display:flex;flex-direction:column;overflow:hidden;z-index:9998;font-family:DM Sans,sans-serif";' +
   'var hd=document.createElement("div");hd.style.cssText="background:#1a1f2e;padding:14px 18px;display:flex;align-items:center;gap:10px";' +
@@ -401,6 +405,13 @@ function buildChatJS() {
   // Fire final summary when user navigates away or closes the tab
   'window.addEventListener("beforeunload",sendFinalLead);' +
   'window.addEventListener("pagehide",sendFinalLead);' +
+  // resetChat: wipes conversation state so reopening gives a fresh session
+  // Called after the user has closed the chat and reopens it
+  'function resetChat(){' +
+  'msgs=[GREETING];' +
+  'leadSent=false;finalSent=false;leadData=null;' +
+  'if(idleTimer){clearTimeout(idleTimer);idleTimer=null;}' +
+  '}' +
   'function sendMsg(txt){msgs.push({r:"u",t:txt});busy=true;touchIdle();render();' +
   'var apiMsgs=msgs.map(function(m){return{role:m.r==="a"?"assistant":"user",content:m.t};});' +
   'fetch("/.netlify/functions/api",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:SYS,messages:apiMsgs,max_tokens:400})})' +
