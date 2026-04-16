@@ -289,6 +289,22 @@ const FOOTER = [
   '<p class="copy">&copy; ' + new Date().getFullYear() + ' Alex Sverdlik. All rights reserved.</p>',
   '</footer>',
   '<div id="asChatWrap"></div>',
+  // Hidden form — Netlify must see this at build time to register "chat-leads" as a valid form
+  // The actual chat widget POSTs programmatically to this form endpoint via fetch()
+  '<form name="chat-leads" netlify data-netlify="true" hidden>',
+  '<input type="text" name="name" />',
+  '<input type="email" name="email" />',
+  '<input type="tel" name="phone" />',
+  '<input type="text" name="language" />',
+  '<input type="text" name="interest" />',
+  '<input type="text" name="budget" />',
+  '<input type="text" name="timeline" />',
+  '<input type="text" name="location" />',
+  '<input type="text" name="buyer-type" />',
+  '<input type="text" name="financial" />',
+  '<textarea name="transcript"></textarea>',
+  '<textarea name="reply-draft"></textarea>',
+  '</form>',
   '<script>window.addEventListener("scroll",function(){document.getElementById("navbar").classList.toggle("scrolled",window.scrollY>50)},{passive:true});</script>',
   '<script src="/chat.js"></script>',
 ].join("\n  ");
@@ -326,42 +342,34 @@ function buildChatJS() {
   'win.appendChild(ft);w.appendChild(win);' +
   'setTimeout(function(){var m=document.getElementById("asChatMsgs");if(m)m.scrollTop=m.scrollHeight;var i=document.getElementById("asChatInput");if(i)i.focus();},50);' +
   '}' +
-  'var FSPREE="' + CONFIG.formspreeId + '";' +
   'var NOTIFY="' + CONFIG.notifyEmail + '";' +
   'var SIG="\\n\\nBest regards,\\nAlex Sverdlik\\nBroker Associate | ZenQuest Realty\\nCoral Springs, FL\\n' + PHONE + '\\nasverdlik@gmail.com";' +
+  // notifyLead: posts a structured lead to Netlify Forms (form name: "chat-leads")
+  // Netlify sends an email notification to Alex (configured in Netlify dashboard)
+  // Full transcript + reply-draft are included so Alex has one-click reply
   'function notifyLead(ld){' +
-  'if(!FSPREE||FSPREE==="YOUR_FORM_ID")return;' +
   'var conv=msgs.map(function(m){return(m.r==="u"?"Visitor: ":"Alex AI: ")+m.t;}).join("\\n");' +
   'var fname=(ld.name||"").split(" ")[0]||"there";' +
   'var draft="Hi "+fname+",\\n\\nThank you for reaching out! I enjoyed our chat and would love to help you with your real estate search"+(ld.interest?(" -- especially regarding "+ld.interest):"")+"."' +
   '+"\\n\\nWould love to learn more about what you are looking for and share some options that might be a great fit. Would you have time for a quick call this week?"' +
   '+"\\n\\nNo pressure at all -- just a friendly conversation to see how I can help."+SIG;' +
-  'var subj="Great chatting with you"+(ld.interest?" about "+ld.interest:"")+" | Alex Sverdlik";' +
-  'var mailto="mailto:"+(ld.email||"")+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(draft);' +
-  'var body="\\n=== NEW LEAD FROM WEBSITE CHAT ===\\n\\n"' +
-  '+"NAME: "+(ld.name||"Not provided")+"\\n"' +
-  '+"EMAIL: "+(ld.email||"Not provided")+"\\n"' +
-  '+"PHONE: "+(ld.phone||"Not provided")+"\\n"' +
-  '+"LANGUAGE: "+(ld.lang||"English")+"\\n\\n"' +
-  '+"--- QUALIFYING INFO ---\\n"' +
-  '+"INTEREST: "+(ld.interest||"Not specified")+"\\n"' +
-  '+"BUDGET: "+(ld.budget||"Not discussed")+"\\n"' +
-  '+"TIMELINE: "+(ld.timeline||"Not discussed")+"\\n"' +
-  '+"LOCATION: "+(ld.location||"Not specified")+"\\n"' +
-  '+"BUYER TYPE: "+(ld.buyerType||"Not specified")+"\\n"' +
-  '+"FINANCIAL: "+(ld.financial||"Not discussed")+"\\n\\n"' +
-  '+"--- REPLY TO THIS LEAD ---\\n"' +
-  '+"Click this link to open a ready-to-send email:\\n"+mailto+"\\n\\n"' +
-  '+"--- CHAT TRANSCRIPT ---\\n"+conv+"\\n\\n"' +
-  '+"Captured: "+new Date().toLocaleString();' +
-  'var fd=new FormData();' +
-  'fd.append("email",NOTIFY);' +
-  'fd.append("_subject","NEW LEAD: "+(ld.name||"Website Visitor")+" via AI Chat");' +
-  'fd.append("_replyto",ld.email||"");' +
-  'fd.append("name",ld.name||"Website Visitor");' +
-  'fd.append("phone",ld.phone||"");' +
-  'fd.append("message",body);' +
-  'fetch("https://formspree.io/f/"+FSPREE,{method:"POST",body:fd,headers:{Accept:"application/json"}}).catch(function(){});' +
+  // Build URL-encoded body for Netlify Forms
+  // Every field name must match an <input name=""> in the hidden form in the footer
+  'var params=new URLSearchParams();' +
+  'params.append("form-name","chat-leads");' +
+  'params.append("name",ld.name||"Website Visitor");' +
+  'params.append("email",ld.email||"");' +
+  'params.append("phone",ld.phone||"");' +
+  'params.append("language",ld.lang||"English");' +
+  'params.append("interest",ld.interest||"Not specified");' +
+  'params.append("budget",ld.budget||"Not discussed");' +
+  'params.append("timeline",ld.timeline||"Not discussed");' +
+  'params.append("location",ld.location||"Not specified");' +
+  'params.append("buyer-type",ld.buyerType||"Not specified");' +
+  'params.append("financial",ld.financial||"Not discussed");' +
+  'params.append("transcript",conv);' +
+  'params.append("reply-draft",draft);' +
+  'fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:params.toString()}).catch(function(){});' +
   '}' +
   'function sendMsg(txt){msgs.push({r:"u",t:txt});busy=true;render();' +
   'var apiMsgs=msgs.map(function(m){return{role:m.r==="a"?"assistant":"user",content:m.t};});' +
