@@ -1,0 +1,11 @@
+{
+  "name": "alexsverdlik-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Alex Sverdlik Real Estate - alexsverdlik.com",
+  "scripts": {
+    "build": "node build-site.js && node build-blog.js",
+    "build:site": "node build-site.js",
+    "build:blog": "node build-blog.js"
+  }
+}
