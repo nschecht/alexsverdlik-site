@@ -85,11 +85,8 @@ const navHTML=idx.match(/<nav[\s\S]*?<\/nav>/)?.[0]||"";
 const footHTML=idx.match(/<footer[\s\S]*?<\/footer>/)?.[0]||"";
 const scriptHTML=idx.match(/<script>[\s\S]*?<\/script>/)?.[0]||"";
 
-// Update nav to include blog link
-const navWithBlog=navHTML.replace('">Stories<','">Stories<').replace(
-  /<a href="\/client-stories"/,
-  '<a href="/blog">Blog</a><a href="/client-stories"'
-);
+// Blog link is now present in main nav via build-site.js, so reuse navHTML directly.
+const navWithBlog=navHTML;
 
 function blogPage(title,desc,slug,body,schemas=""){
   return `<!DOCTYPE html>

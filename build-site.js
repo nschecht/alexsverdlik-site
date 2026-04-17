@@ -257,6 +257,7 @@ function nav(activePath, isRussian) {
     { href: "/community", label: "Community", ru: "Сообщество" },
     { href: "/investment", label: "Investment", ru: "Инвестиции" },
     { href: "/client-stories", label: "Stories", ru: "Отзывы" },
+    { href: "/blog", label: "Blog", ru: "Блог" },
     { href: "/search", label: "Search Homes", ru: "Поиск" },
     { href: "/contact", label: "Contact", ru: "Контакт" },
   ];
