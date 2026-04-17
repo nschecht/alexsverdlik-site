@@ -1,4 +1,4 @@
-const fs=require("fs"),path=require("path");
+const fs=require("fs"),path=require("path"),sharp=require("sharp");
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║                                                                ║
@@ -32,21 +32,30 @@ if(importFiles.length>0){
 
 // ===== IMAGE EXTRACTION =====
 // Converts base64 data URIs in post HTML to proper image files.
+// Resizes down to 960px max edge and re-encodes JPEG with mozjpeg at quality 78.
 // /blog/images/[slug]-1.jpg, /blog/images/[slug]-2.jpg, etc.
+// Returns { html, tasks } — tasks is an array of pending sharp promises.
 function extractImages(html,slug){
   const imgDir=`${OUT}/blog/images`;
   fs.mkdirSync(imgDir,{recursive:true});
+  const tasks=[];
   let count=0;
-  return html.replace(/(<img[^>]*)\ssrc="data:image\/(jpeg|png|webp);base64,([^"]+)"([^>]*>)/gi,(match,pre,fmt,b64,post)=>{
+  const newHtml=html.replace(/(<img[^>]*)\ssrc="data:image\/(jpeg|png|webp);base64,([^"]+)"([^>]*>)/gi,(match,pre,fmt,b64,post)=>{
     count++;
-    const ext=fmt==="png"?"png":"jpg";
-    const filename=`${slug}-${count}.${ext}`;
+    const filename=`${slug}-${count}.jpg`;
     const filepath=`${imgDir}/${filename}`;
-    fs.writeFileSync(filepath,Buffer.from(b64,"base64"));
-    const fileSizeKB=Math.round(fs.statSync(filepath).size/1024);
-    console.log(`  📷 ${filename} (${fileSizeKB}KB)`);
-    return `${pre} src="/blog/images/${filename}" loading="lazy"${post}`;
+    tasks.push((async()=>{
+      await sharp(Buffer.from(b64,"base64"))
+        .rotate() // honor EXIF orientation
+        .resize({width:960,height:960,fit:"inside",withoutEnlargement:true})
+        .jpeg({quality:78,mozjpeg:true})
+        .toFile(filepath);
+      const kb=Math.round(fs.statSync(filepath).size/1024);
+      console.log(`  📷 ${filename} (${kb}KB)`);
+    })());
+    return `${pre} src="/blog/images/${filename}" loading="lazy" decoding="async"${post}`;
   });
+  return{html:newHtml,tasks};
 }
 
 const CSS=fs.readFileSync(`${OUT}/index.html`,"utf8").match(/<style>([\s\S]*?)<\/style>/)?.[1]||"";
@@ -336,12 +345,18 @@ if(dashboardPosts.length>0){
 }
 
 // ===== PROCESS IMAGES IN ALL POSTS =====
+// Sharp is async, so wrap everything from here down in an async IIFE.
+(async()=>{
 console.log("\n📷 Processing images...");
+const allTasks=[];
 posts.forEach(p=>{
   if(p.body&&p.body.includes("data:image")){
-    p.body=extractImages(p.body,p.slug);
+    const{html,tasks}=extractImages(p.body,p.slug);
+    p.body=html;
+    allTasks.push(...tasks);
   }
 });
+await Promise.all(allTasks);
 console.log("");
 
 // Generate blog index
@@ -405,3 +420,4 @@ console.log("✓ _redirects updated");
 
 console.log(`\nDone! Blog index + ${posts.length} posts built.`);
 console.log(`Total blog pages: ${posts.length + 1}`);
+})().catch(err=>{console.error("\n❌ Build failed:",err);process.exit(1);});
