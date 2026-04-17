@@ -5,3 +5,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/blog/kosher-pizza-coral-springs-florida"
+  to = "/blog"
+  status = 301
+  force = true
