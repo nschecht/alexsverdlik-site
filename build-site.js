@@ -164,6 +164,19 @@ p{font-size:clamp(15px,1.6vw,17px);line-height:1.8;font-weight:300}
 .quote-card .author{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid rgba(45,49,66,.07);flex-wrap:wrap;gap:8px}
 .quote-card .author-name{font-size:13px;font-weight:600;color:var(--navy)}
 
+/* Featured reviews carousel (homepage) */
+.carousel{position:relative;max-width:880px;margin:48px auto 0;min-height:380px}
+.carousel-card{position:absolute;top:0;left:0;right:0;background:var(--white);border:1px solid rgba(45,49,66,.07);border-left:3px solid var(--gold);border-radius:5px;padding:clamp(28px,4vw,48px);opacity:0;visibility:hidden;transition:opacity .6s ease}
+.carousel-card.is-active{opacity:1;visibility:visible}
+.carousel-card .mark{font-family:var(--fd);font-size:64px;color:rgba(201,169,110,.18);line-height:1;margin-bottom:8px}
+.carousel-card blockquote{font-family:var(--fd);font-style:italic;font-size:clamp(18px,2.2vw,24px);line-height:1.55;color:var(--char);margin:0 0 24px;padding:0}
+.carousel-card .author{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid rgba(45,49,66,.07);flex-wrap:wrap;gap:12px}
+.carousel-card .author-name{font-family:var(--fb);font-size:15px;font-weight:600;color:var(--navy)}
+@media(prefers-reduced-motion:reduce){
+  .carousel{min-height:0}
+  .carousel-card{position:relative;opacity:1;visibility:visible;margin-bottom:24px;transition:none}
+}
+
 /* Contact form */
 .form-group{margin-bottom:18px}
 .form-group label{font-size:11px;color:var(--wgray);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:7px}
@@ -197,6 +210,9 @@ p{font-size:clamp(15px,1.6vw,17px);line-height:1.8;font-weight:300}
   .about-photo{max-width:260px;margin:0 auto}
   .card:hover{transform:none}
   .cred-grid{grid-template-columns:1fr !important}
+  .carousel{min-height:480px}
+  .carousel-card{padding:24px}
+  .carousel-card .mark{font-size:48px}
 }
 @media(max-width:380px){
   .section{padding:48px 16px}
@@ -503,6 +519,59 @@ function renderReviewCard(r) {
         </article>`;
 }
 
+function renderFeaturedCarousel(featuredReviews, isRussian) {
+  // The reviews-public-list endpoint sorts featured-first then newest-first by
+  // createdAt, so the array passed in here (= reviews.filter(r => r.featured))
+  // preserves that order. Linda & Jay (newer) end up at index 0 = first card
+  // visible on page load. If a future review becomes featured with a newer
+  // createdAt, IT will land at index 0 — by design. Don't reintroduce manual
+  // ordering here unless that natural rule changes.
+  const headline = isRussian ? "Что говорят клиенты" : "What clients say";
+  const cards = featuredReviews.map((r, i) => {
+    const activeClass = i === 0 ? " is-active" : "";
+    const badge = TRANSACTION_LABELS[r.transactionType];
+    return `
+        <article class="carousel-card${activeClass}" data-index="${i}">
+          <div class="mark" aria-hidden="true">&ldquo;</div>
+          <blockquote>${escapeHtml(r.quoteText)}</blockquote>
+          <div class="author">
+            <span class="author-name">${escapeHtml(r.preferredCredit || "")}</span>
+            ${badge ? `<span class="badge badge-gold">${badge}</span>` : ""}
+          </div>
+        </article>`;
+  }).join("");
+  return `
+  <section class="featured-reviews section section-light" aria-label="${headline}">
+    <div class="container">
+      <h2 class="center">${headline}</h2>
+      <div class="divider center"></div>
+      <div class="carousel" role="region" aria-live="polite">${cards}
+      </div>
+    </div>
+  </section>
+  <script>
+    (function(){
+      var cards = document.querySelectorAll('.carousel .carousel-card');
+      if (cards.length < 2) return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var idx = 0, timer = null;
+      function advance(){
+        cards[idx].classList.remove('is-active');
+        idx = (idx + 1) % cards.length;
+        cards[idx].classList.add('is-active');
+      }
+      function start(){ if (!timer) timer = setInterval(advance, 5000); }
+      function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+      var carousel = document.querySelector('.carousel');
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+      carousel.addEventListener('focusin', stop);
+      carousel.addEventListener('focusout', start);
+      start();
+    })();
+  </script>`;
+}
+
 // At build time, fetch published reviews from the dashboard-v2 public endpoint.
 // Throws on any failure -> fails the build loudly (no silent empty /testimonials).
 async function fetchPublishedReviews() {
@@ -518,6 +587,10 @@ async function fetchPublishedReviews() {
 
 async function main() {
 const reviews = await fetchPublishedReviews();
+const featuredReviews = reviews.filter(r => r.featured);
+if (featuredReviews.length === 0) {
+  throw new Error("No featured reviews — refusing to ship empty homepage carousel");
+}
 
 const PAGES = [];
 
@@ -568,6 +641,8 @@ PAGES.push(page({
       </div>
     </div>
   </section>
+
+  ${renderFeaturedCarousel(featuredReviews, false)}
 
   ${ctaBlock("Ready to Explore Southeast Florida?", "Whether you're relocating, investing, or upgrading — let's find the right property together.")}
   `
@@ -1068,6 +1143,9 @@ PAGES.push(page({
       </div>
     </div>
   </section>
+
+  ${renderFeaturedCarousel(featuredReviews, true)}
+
   ${ctaBlock("Давайте Поговорим", "Расскажите о своей мечте, и Алекс подберёт варианты.")}
   `
 }));
