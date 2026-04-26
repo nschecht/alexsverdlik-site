@@ -215,44 +215,59 @@ p{font-size:clamp(15px,1.6vw,17px);line-height:1.8;font-weight:300}
 `;
 
 // ===== SCHEMA MARKUP =====
-const SCHEMA_AGENT = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
-  "name": "Alex Sverdlik",
-  "telephone": "+16266443476",
-  "email": CONFIG.email,
-  "url": SITE,
-  "image": `${SITE}/images/alex-sverdlik.jpg`,
-  "description": "Luxury real estate broker in Parkland, FL specializing in $1M-$10M+ properties, waterfront estates, and relocation from the Northeast and California. Bilingual English/Russian.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Coral Springs",
-    "addressLocality": "Coral Springs",
-    "addressRegion": "FL",
-    "postalCode": "33067",
-    "addressCountry": "US"
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": 26.3109, "longitude": -80.2456 },
-  "areaServed": [
-    { "@type": "City", "name": "Parkland, FL" },
-    { "@type": "City", "name": "Boca Raton, FL" },
-    { "@type": "City", "name": "Coral Springs, FL" },
-    { "@type": "City", "name": "Fort Lauderdale, FL" },
-    { "@type": "City", "name": "Lighthouse Point, FL" },
-    { "@type": "City", "name": "Deerfield Beach, FL" }
-  ],
-  "knowsLanguage": ["en", "ru"],
-  "hasCredential": {
-    "@type": "EducationalOccupationalCredential",
-    "credentialCategory": "Real Estate Broker License",
-    "recognizedBy": { "@type": "Organization", "name": "Florida DBPR" }
-  },
-  "worksFor": { "@type": "RealEstateAgent", "name": "ZenQuest Realty" },
-  "sameAs": [
-    "https://www.zillow.com/profile/Alex%20Sverdlik",
-    "https://www.yelp.com/biz/alex-sverdlik-real-broker-parkland"
-  ]
-}, null, 2);
+// Source-of-truth review-profile URLs (consumed by both the agent schema's
+// sameAs and the /testimonials footer). Update once here; both stay in sync.
+const REVIEW_PROFILES = {
+  zillow: "https://www.zillow.com/profile/Alex%20Sverdlik",
+  yelp: "https://www.yelp.com/biz/alex-sverdlik-real-broker-parkland",
+  fastExpert: "https://www.fastexpert.com/agents/alex-sverdlik-55213/",
+  google: "https://www.google.com/search?q=Alex+Sverdlik+realtor#lrd=0x825386bce42261b7:0xfc9d3afef630a38d,1",
+};
+
+function buildAgentSchema(locale) {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Alex Sverdlik",
+    "telephone": "+16266443476",
+    "email": CONFIG.email,
+    "url": SITE,
+    // image removed — referenced asset doesn't exist; re-add when a real
+    // portrait + 1200x630 OG image are commissioned (BUILD-LOG carry-forward).
+    "description": "Luxury real estate broker in Parkland, FL specializing in $1M+ luxury properties, waterfront estates, and relocation from the Northeast and California. Bilingual English/Russian.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1750 N University Dr., #201",
+      "addressLocality": "Coral Springs",
+      "addressRegion": "FL",
+      "postalCode": "33071",
+      "addressCountry": "US"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 26.2530, "longitude": -80.2539 },
+    "areaServed": [
+      { "@type": "City", "name": "Parkland, FL" },
+      { "@type": "City", "name": "Boca Raton, FL" },
+      { "@type": "City", "name": "Coral Springs, FL" },
+      { "@type": "City", "name": "Fort Lauderdale, FL" },
+      { "@type": "City", "name": "Lighthouse Point, FL" },
+      { "@type": "City", "name": "Deerfield Beach, FL" }
+    ],
+    "knowsLanguage": ["en", "ru"],
+    "inLanguage": locale,
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "Real Estate Broker License",
+      "recognizedBy": { "@type": "Organization", "name": "Florida DBPR" }
+    },
+    "worksFor": { "@type": "RealEstateOrganization", "name": "ZenQuest Realty" },
+    "sameAs": [
+      REVIEW_PROFILES.zillow,
+      REVIEW_PROFILES.yelp,
+      REVIEW_PROFILES.fastExpert,
+      REVIEW_PROFILES.google,
+    ]
+  }, null, 2);
+}
 
 // ===== NAV BUILDER =====
 function nav(activePath, isRussian) {
@@ -476,38 +491,46 @@ function buildChatJS() {
 }
 
 // ===== PAGE BUILDER =====
-function page({ title, description, path: pg, canonical, body, schema, noindex }) {
+function page({ title, description, path: pg, canonical, body, schema, noindex, isRussian }) {
   const can = canonical || `${SITE}${pg}`;
+  const lang = isRussian ? "ru" : "en";
+  const ogLocale = isRussian ? "ru_RU" : "en_US";
+  // hreflang only on / and /ru (the only EN<->RU pair today). EN-only inner pages
+  // get no hreflang — correct signal: no Russian variant exists.
+  const hreflangBlock = (pg === "/" || pg === "/ru") ? `
+  <link rel="alternate" hreflang="en" href="${SITE}/">
+  <link rel="alternate" hreflang="ru" href="${SITE}/ru">
+  <link rel="alternate" hreflang="x-default" href="${SITE}/">` : "";
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${lang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>${title}</title>
   <meta name="description" content="${description}">
-  <link rel="canonical" href="${can}">
+  <link rel="canonical" href="${can}">${hreflangBlock}
   ${noindex ? '<meta name="robots" content="noindex">' : ''}
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:url" content="${can}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Alex Sverdlik - Luxury Real Estate">
-  <meta property="og:locale" content="en_US">
-  
+  <meta property="og:locale" content="${ogLocale}">
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
-  
+
   <!-- Schema -->
-  <script type="application/ld+json">${schema || SCHEMA_AGENT}</script>
-  
+  <script type="application/ld+json">${schema || buildAgentSchema(lang)}</script>
+
   <style>${CSS}</style>
 </head>
 <body>
-  ${nav(pg)}
+  ${nav(pg, isRussian)}
   ${body}
   ${FOOTER}
 </body>
@@ -981,10 +1004,10 @@ PAGES.push(page({
       </div>
       <p class="center" style="margin-top:36px;font-size:14px;color:var(--slate)">
         See more reviews on
-        <a href="https://www.zillow.com/profile/Alex%20Sverdlik" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Zillow</a> ·
-        <a href="https://www.yelp.com/biz/alex-sverdlik-real-broker-parkland" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Yelp</a> ·
-        <a href="https://www.fastexpert.com/agents/alex-sverdlik-55213/" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">FastExpert</a> ·
-        <a href="https://www.google.com/search?q=Alex+Sverdlik+realtor#lrd=0x825386bce42261b7:0xfc9d3afef630a38d,1" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Google</a>
+        <a href="${REVIEW_PROFILES.zillow}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Zillow</a> ·
+        <a href="${REVIEW_PROFILES.yelp}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Yelp</a> ·
+        <a href="${REVIEW_PROFILES.fastExpert}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">FastExpert</a> ·
+        <a href="${REVIEW_PROFILES.google}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Google</a>
       </p>
     </div>
   </section>
@@ -1132,6 +1155,7 @@ PAGES.push(page({
   title: "Алекс Свердлик | Элитная Недвижимость Паркленд Флорида | Русскоговорящий Риелтор",
   description: "Элитные дома, недвижимость на воде и инвестиции в Юго-Восточной Флориде. Русскоговорящий брокер с 20-летним опытом. Паркленд, Бока-Ратон, Форт-Лодердейл. Звоните (626) 644-3476.",
   path: "/ru",
+  isRussian: true,
   body: `
   <section class="hero">
     <div class="hero-content">
