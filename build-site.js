@@ -943,7 +943,8 @@ PAGES.push(page({
         See more reviews on
         <a href="https://www.zillow.com/profile/Alex%20Sverdlik" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Zillow</a> ·
         <a href="https://www.yelp.com/biz/alex-sverdlik-real-broker-parkland" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Yelp</a> ·
-        <a href="https://www.fastexpert.com/agents/alex-sverdlik-55213/" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">FastExpert</a>
+        <a href="https://www.fastexpert.com/agents/alex-sverdlik-55213/" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">FastExpert</a> ·
+        <a href="https://www.google.com/search?q=Alex+Sverdlik+realtor#lrd=0x825386bce42261b7:0xfc9d3afef630a38d,1" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Google</a>
       </p>
     </div>
   </section>
