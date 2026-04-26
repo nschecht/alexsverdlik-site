@@ -388,12 +388,52 @@ function buildChatJS() {
   'params.append("reply-draft",draft);' +
   'return params.toString();' +
   '}' +
+  // CRM POST helpers — additive path to dashboard-v2 leads-public-create.
+  // Email path (above) is the safety net; CRM is the upgrade.
+  // Fields where chat data cleanly maps to API enums/types go in body.preferences;
+  // free-form fields (budget, timeline, financial, interest, buyerType) get folded
+  // into a bullet-list notes string instead of attempting fragile client-side parsing.
+  'function buildPublicLeadBody(ld){' +
+  'var body={name:ld.name||"Website Visitor"};' +
+  'if(ld.email)body.email=ld.email;' +
+  'if(ld.phone)body.phone=ld.phone;' +
+  'var preferences={};' +
+  'if(ld.location)preferences.locations=[ld.location];' +
+  'if(ld.lang)preferences.languages=[ld.lang];' +
+  'if(Object.keys(preferences).length)body.preferences=preferences;' +
+  'var noteLines=["Captured via website chat."];' +
+  'if(ld.interest)noteLines.push("- Interest: "+ld.interest);' +
+  'if(ld.buyerType)noteLines.push("- Buyer type: "+ld.buyerType);' +
+  'if(ld.budget)noteLines.push("- Budget mentioned: "+ld.budget);' +
+  'if(ld.timeline)noteLines.push("- Timeline mentioned: "+ld.timeline);' +
+  'if(ld.financial)noteLines.push("- Financial readiness: "+ld.financial);' +
+  'if(ld.lang)noteLines.push("- Language: "+ld.lang);' +
+  'body.notes=noteLines.join("\\n").substring(0,2000);' +
+  'try{var campaign=new URLSearchParams(window.location.search).get("campaign");' +
+  'if(campaign)body.sourceCampaign=campaign.substring(0,100);}catch(e){}' +
+  'return body;' +
+  '}' +
+  // Outer try/catch wraps the entire body-construction + fetch. Inner .catch
+  // handles async network/4xx/5xx. Together: any error in CRM logic is
+  // logged-and-swallowed; email path (caller's prior fetch) is unbreakable.
+  'function postToCRM(ld){' +
+  'try{' +
+  'fetch("https://alex-sverdlik-dashboard-v2.netlify.app/.netlify/functions/leads-public-create",{' +
+  'method:"POST",headers:{"Content-Type":"application/json"},' +
+  'body:JSON.stringify(buildPublicLeadBody(ld)),keepalive:true' +
+  '}).catch(function(e){console.error("CRM lead post failed (email path unaffected):",e);});' +
+  '}catch(e){' +
+  'console.error("CRM lead post threw synchronously (email path unaffected):",e);' +
+  '}' +
+  '}' +
   // Initial fire: called when AI emits the first [LEAD:...] marker with qualifying info
   'function notifyLead(ld){' +
   'leadData=ld;' +
   'if(leadSent)return;' +   // Silently ignore repeat markers — the final-send path handles updates
   'leadSent=true;' +
   'fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:buildLeadBody(ld,"initial"),keepalive:true}).catch(function(){});' +
+  // CRM POST — additive; fail-silent + try/catch wrapped in postToCRM
+  'postToCRM(ld);' +
   '}' +
   // Merge new lead info into existing leadData (new non-empty fields overwrite old ones)
   'function mergeLead(ld){' +
