@@ -256,7 +256,7 @@ function nav(activePath, isRussian) {
     { href: "/lifestyle", label: "Lifestyle", ru: "Жизнь" },
     { href: "/community", label: "Community", ru: "Сообщество" },
     { href: "/investment", label: "Investment", ru: "Инвестиции" },
-    { href: "/client-stories", label: "Stories", ru: "Отзывы" },
+    { href: "/testimonials", label: "Stories", ru: "Отзывы" },
     { href: "/blog", label: "Blog", ru: "Блог" },
     { href: "/search", label: "Search Homes", ru: "Поиск" },
     { href: "/contact", label: "Contact", ru: "Контакт" },
@@ -478,7 +478,46 @@ function ctaBlock(heading, sub) {
   </section>`;
 }
 
+// ===== TESTIMONIAL HELPERS =====
+const TRANSACTION_LABELS = {
+  "first-time": "First-Time Buyer",
+  "waterfront": "Waterfront",
+  "1031": "1031 Exchange",
+  "luxury": "Luxury",
+  "russian-speaking": "Russian-Speaking",
+  "relocator": "Relocator",
+};
+const escapeHtml = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+function renderReviewCard(r) {
+  const badge = TRANSACTION_LABELS[r.transactionType];
+  const featuredClass = r.featured ? " card-gold" : "";
+  const fullWidthStyle = r.featured ? ' style="grid-column:1/-1"' : "";
+  return `
+        <article class="card${featuredClass} quote-card"${fullWidthStyle}>
+          <div class="mark" aria-hidden="true">&ldquo;</div>
+          <blockquote><p>${escapeHtml(r.quoteText)}</p></blockquote>
+          <div class="author">
+            <span class="author-name">${escapeHtml(r.preferredCredit || "")}</span>
+            ${badge ? `<span class="badge badge-gold">${badge}</span>` : ""}
+          </div>
+        </article>`;
+}
+
+// At build time, fetch published reviews from the dashboard-v2 public endpoint.
+// Throws on any failure -> fails the build loudly (no silent empty /testimonials).
+async function fetchPublishedReviews() {
+  const url = "https://alex-sverdlik-dashboard-v2.netlify.app/.netlify/functions/reviews-public-list";
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`reviews-public-list returned HTTP ${res.status}`);
+  const data = await res.json();
+  if (!Array.isArray(data['reviews'])) throw new Error("reviews-public-list returned unexpected shape (expected {reviews: [...]})");
+  return data['reviews'];
+}
+
 // ===== PAGES =====
+
+async function main() {
+const reviews = await fetchPublishedReviews();
 
 const PAGES = [];
 
@@ -829,37 +868,32 @@ PAGES.push(page({
   `
 }));
 
-// --- CLIENT STORIES ---
+// --- TESTIMONIALS ---
+// Renders the 6 published reviews fetched at build time. Featured reviews
+// (Glenn + Linda & Jay) get full-row width with gold accent border via
+// .card-gold; non-featured fill the standard 2-col grid.
+const reviewsBody = reviews.length === 0
+  ? `
+        <article class="card card-gold quote-card" style="grid-column:1/-1;text-align:center">
+          <h3 style="color:var(--navy);margin-bottom:12px">Reviews coming soon</h3>
+          <p>Stories from Alex's clients will appear here shortly.</p>
+        </article>`
+  : reviews.map(renderReviewCard).join("");
+
 PAGES.push(page({
   title: "Client Reviews & Testimonials | Alex Sverdlik Realtor Parkland FL",
   description: "Read what clients say about working with Alex Sverdlik — luxury realtor in Parkland, Florida. Reviews from first-time buyers, waterfront sellers, investors, and relocating families.",
-  path: "/client-stories",
+  path: "/testimonials",
   body: `
   <section class="section section-light" style="padding-top:140px">
     <div class="container">
-      <h1 class="center">Client Stories</h1>
-      <p class="subtitle center">Many of Alex's clients come back — and send their friends</p>
+      <h1 class="center">What clients say about working with Alex</h1>
+      <p class="subtitle center">Many clients return for second transactions — and send their friends.</p>
       <div class="divider center"></div>
-      <div class="grid grid-2" style="margin-top:48px">
-        ${[
-          { tag: "First-Time Buyer", text: "Client testimonial coming soon — Northeast relocator experience." },
-          { tag: "Waterfront Seller", text: "Client testimonial coming soon — luxury waterfront sale." },
-          { tag: "Investor", text: "Client testimonial coming soon — 1031 exchange under pressure." },
-          { tag: "Industry Pro", text: "Client testimonial coming soon — industry professional recommendation." },
-          { tag: "First Home", text: "Client testimonial coming soon — family milestone purchase." },
-          { tag: "Repeat Client", text: "Client testimonial coming soon — returning client experience." },
-        ].map(r => `
-        <article class="card quote-card">
-          <div class="mark">&ldquo;</div>
-          <blockquote><p>${r.text}</p></blockquote>
-          <div class="author">
-            <span class="author-name">Coming Soon</span>
-            <span class="badge badge-gold">${r.tag}</span>
-          </div>
-        </article>`).join("")}
+      <div class="grid grid-2" style="margin-top:48px">${reviewsBody}
       </div>
       <p class="center" style="margin-top:36px;font-size:14px;color:var(--slate)">
-        See reviews on
+        See more reviews on
         <a href="https://www.zillow.com/profile/Alex%20Sverdlik" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Zillow</a> ·
         <a href="https://www.yelp.com/biz/alex-sverdlik-real-broker-parkland" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Yelp</a> ·
         <a href="https://www.fastexpert.com/agents/alex-sverdlik-55213/" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">FastExpert</a>
@@ -1081,7 +1115,7 @@ const pageFiles = [
   { path: "/lifestyle", file: "lifestyle.html" },
   { path: "/community", file: "community.html" },
   { path: "/investment", file: "investment.html" },
-  { path: "/client-stories", file: "client-stories.html" },
+  { path: "/testimonials", file: "testimonials.html" },
   { path: "/contact", file: "contact.html" },
   { path: "/contact-thanks", file: "contact-thanks.html" },
   { path: "/search", file: "search.html" },
@@ -1115,3 +1149,10 @@ fs.writeFileSync(path.join(OUT, "_redirects"), redir);
 console.log("✓ _redirects");
 
 console.log(`\nDone! ${PAGES.length} pages built in ${OUT}`);
+
+}
+
+main().catch(err => {
+  console.error("Build failed:", err.message);
+  process.exit(1);
+});

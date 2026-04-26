@@ -11,3 +11,9 @@
   to = "/blog"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/client-stories"
+  to = "/testimonials"
+  status = 301
+  force = true
