@@ -9,14 +9,14 @@
     "language": "en",
     "images": [],
     "id": "post_eded5d78e905c2c4",
-    "status": "draft",
+    "status": "published",
     "authorId": "user_3b74945f45c2b930",
     "createdBy": "user_3b74945f45c2b930",
     "lastEditedBy": "user_3b74945f45c2b930",
-    "publishedAt": null,
+    "publishedAt": "2026-04-27T17:29:20.145Z",
     "publishedSha": null,
-    "version": 1,
+    "version": 2,
     "createdAt": "2026-04-27T15:51:39.164Z",
-    "updatedAt": "2026-04-27T15:51:39.164Z"
+    "updatedAt": "2026-04-27T16:30:25.883Z"
   }
 ]
