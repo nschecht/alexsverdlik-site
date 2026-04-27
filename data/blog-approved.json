@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "slug": "s3h-verify-1777305097",
+    "title": "S3h Verify Post",
+    "body": "This post exists to verify the posts-publish + posts-unpublish flow during Session 3h. Will be deleted after verification.",
+    "excerpt": "",
+    "metaDescription": "",
+    "category": "general",
+    "language": "en",
+    "images": [],
+    "id": "post_eded5d78e905c2c4",
+    "status": "draft",
+    "authorId": "user_3b74945f45c2b930",
+    "createdBy": "user_3b74945f45c2b930",
+    "lastEditedBy": "user_3b74945f45c2b930",
+    "publishedAt": null,
+    "publishedSha": null,
+    "version": 1,
+    "createdAt": "2026-04-27T15:51:39.164Z",
+    "updatedAt": "2026-04-27T15:51:39.164Z"
+  }
+]
