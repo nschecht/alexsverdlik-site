@@ -15,6 +15,14 @@ const PHONE = "(626) 644-3476";            // Same as build-site.js #2
 const OUT   = path.join(__dirname, "dist");
 const Y=new Date().getFullYear();
 
+// ===== CLEAN BUILD =====
+// Wipe dist/blog/ at the start of every build so unpublished posts'
+// stale <slug>.html files don't persist on the live site.
+// (Netlify deploys are file-additive — without this, removed posts
+// linger as orphaned static assets. Filed Session 3h, fixed Session 3i.)
+fs.rmSync(`${OUT}/blog`, {recursive: true, force: true});
+fs.mkdirSync(`${OUT}/blog`, {recursive: true});
+
 // ===== IMPORT DASHBOARD POSTS =====
 // Drop the exported JSON from the dashboard into the same folder as this script.
 // Name it: blog-approved-YYYY-MM-DD.json (or any .json file starting with "blog-approved")
