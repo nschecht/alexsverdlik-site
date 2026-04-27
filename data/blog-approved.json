@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "slug": "s3i-cleanup-verify-1777326980",
+    "title": "Session 3i cleanup verification",
+    "body": "<p>Test post for build-blog.js cleanup verify cycle. Will be deleted after verification.</p>",
+    "excerpt": "Session 3i test post — will be deleted",
+    "metaDescription": "Session 3i cleanup verification post",
+    "category": "general",
+    "language": "en",
+    "images": [],
+    "id": "post_94ffc37c5a3e2a33",
+    "status": "published",
+    "authorId": "user_3b74945f45c2b930",
+    "createdBy": "user_3b74945f45c2b930",
+    "lastEditedBy": "user_3b74945f45c2b930",
+    "publishedAt": "2026-04-27T21:59:50.138Z",
+    "publishedSha": null,
+    "version": 1,
+    "createdAt": "2026-04-27T21:56:21.762Z",
+    "updatedAt": "2026-04-27T21:56:21.762Z"
+  }
+]
