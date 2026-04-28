@@ -672,7 +672,7 @@ PAGES.push(page({
         </div>
         <div class="card">
           <h4 style="color:var(--navy);margin-bottom:10px">Waterfront &amp; Estate Specialist</h4>
-          <p>From California waterfront to Parkland's BBB Ranches and MiraLago, Alex moves the homes other agents quote-and-pray on. Multi-acre estates, equestrian properties, and waterfront listings priced where most agents flinch.</p>
+          <p>Alex represents buyers and sellers across South Florida's most distinctive properties — from Parkland's BBB Ranches and MiraLago to oceanfront Palm Beach and Lighthouse Point.</p>
         </div>
       </div>
       <div style="margin-top:40px">
