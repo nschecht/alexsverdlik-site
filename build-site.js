@@ -657,7 +657,7 @@ PAGES.push(page({
       <h2>Why Work with Alex?</h2>
       <p class="subtitle center">Smith Barney finance veteran. Silicon Valley startup pioneer. Top-producing California realtor. Now Southeast Florida's most qualified luxury broker.</p>
       <div class="divider center"></div>
-      <div class="grid grid-3" style="margin-top:48px;text-align:left">
+      <div class="grid grid-4" style="margin-top:48px;text-align:left">
         <div class="card">
           <h4 style="color:var(--navy);margin-bottom:10px">Finance-First Approach</h4>
           <p>From Smith Barney to Shipwire.com to real estate — Alex speaks the language of returns, tax strategy, and portfolio growth.</p>
@@ -669,6 +669,10 @@ PAGES.push(page({
         <div class="card">
           <h4 style="color:var(--navy);margin-bottom:10px">Bilingual &amp; International</h4>
           <p>Fluent in Russian and English. Experienced with international buyers, foreign investment structures, and cross-border transactions.</p>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--navy);margin-bottom:10px">Waterfront &amp; Estate Specialist</h4>
+          <p>From California waterfront to Parkland's BBB Ranches and MiraLago, Alex moves the homes other agents quote-and-pray on. Multi-acre estates, equestrian properties, and waterfront listings priced where most agents flinch.</p>
         </div>
       </div>
       <div style="margin-top:40px">
