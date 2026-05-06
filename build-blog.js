@@ -110,6 +110,19 @@ function blogPage(title,desc,slug,body,schemas=""){
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="43PLmnHO_JJyAGUFZWFIRAic9c4Q4l7IwNo7tb1gCRE">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7HT1SZM7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S7HT1SZM7Y');
+</script>
+
 <title>${title} | Alex Sverdlik</title>
 <meta name="description" content="${desc}">
 <link rel="canonical" href="${SITE}/blog/${slug}">
@@ -372,6 +385,18 @@ const blogIndex=`<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="43PLmnHO_JJyAGUFZWFIRAic9c4Q4l7IwNo7tb1gCRE">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7HT1SZM7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S7HT1SZM7Y');
+</script>
+
 <title>Blog | Alex Sverdlik | Parkland FL Real Estate Insights</title>
 <meta name="description" content="Expert insights on SE Florida real estate: relocation guides, market analysis, investment strategy, schools, community. By Alex Sverdlik, luxury broker.">
 <link rel="canonical" href="${SITE}/blog">

@@ -313,6 +313,7 @@ const FOOTER = [
   '<p>Broker Associate · ZenQuest Realty · License BK3503241</p>',
   '<p>Coral Springs, FL · ' + PHONE + '</p>',
   '<p class="copy">&copy; ' + new Date().getFullYear() + ' Alex Sverdlik. All rights reserved.</p>',
+  '<p class="copy" style="margin-top:8px"><a href="/privacy" style="color:rgba(154,154,176,.6);text-decoration:none;border-bottom:1px solid rgba(154,154,176,.2)">Privacy Policy</a></p>',
   '</footer>',
   '<div id="asChatWrap"></div>',
   // Hidden form — Netlify must see this at build time to register "chat-leads" as a valid form
@@ -506,6 +507,19 @@ function page({ title, description, path: pg, canonical, body, schema, noindex, 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Google Search Console verification -->
+  <meta name="google-site-verification" content="43PLmnHO_JJyAGUFZWFIRAic9c4Q4l7IwNo7tb1gCRE">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7HT1SZM7Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S7HT1SZM7Y');
+  </script>
+
   <title>${title}</title>
   <meta name="description" content="${description}">
   <link rel="canonical" href="${can}">${hreflangBlock}
@@ -1091,6 +1105,39 @@ PAGES.push(page({
   `
 }));
 
+// --- PRIVACY POLICY ---
+PAGES.push(page({
+  title: "Privacy Policy | Alex Sverdlik",
+  description: "Privacy policy for alexsverdlik.com — what we collect, how we use it, your choices.",
+  path: "/privacy",
+  body: `
+  <section class="section section-light" style="padding-top:140px">
+    <div class="container" style="max-width:760px">
+      <h1 style="margin-bottom:8px">Privacy Policy</h1>
+      <p style="font-size:14px;color:var(--slate);margin-bottom:32px">Last updated: May 6, 2026</p>
+
+      <p style="margin-bottom:24px;font-size:16px;line-height:1.7">Alex Sverdlik Real Estate respects your privacy. This page explains what information we collect on alexsverdlik.com and how we use it.</p>
+
+      <h2 style="margin-top:32px">What we collect</h2>
+      <p style="margin-top:12px;font-size:16px;line-height:1.7">When you fill out the contact form or use the chat widget, we collect the information you provide — typically your name, email, phone number, and any details about your real estate needs. When you visit any page, Google Analytics records anonymized traffic data such as page views, approximate location, device type, and referral source. We do not use advertising cookies.</p>
+
+      <h2 style="margin-top:32px">How we use it</h2>
+      <p style="margin-top:12px;font-size:16px;line-height:1.7">Contact information is used solely to respond to your inquiry and to manage your record in our internal client management system. Analytics data helps us understand which pages and topics are useful to visitors. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+
+      <h2 style="margin-top:32px">Third-party services</h2>
+      <p style="margin-top:12px;font-size:16px;line-height:1.7">This site uses Netlify (for hosting and form submissions), Google Analytics (for traffic measurement), and an AI chat widget powered by Anthropic. Each handles data under their own privacy policies.</p>
+
+      <h2 style="margin-top:32px">Your choices</h2>
+      <p style="margin-top:12px;font-size:16px;line-height:1.7">You can opt out of Google Analytics by using a browser-level Do Not Track setting or by installing the official Google Analytics opt-out browser add-on. To request deletion of any data you've submitted, email <a href="mailto:asverdlik@gmail.com" style="color:var(--gold);font-weight:600">asverdlik@gmail.com</a>.</p>
+
+      <p style="margin-top:48px">
+        <a href="/" class="btn btn-gold">Back to Home</a>
+      </p>
+    </div>
+  </section>
+  `
+}));
+
 // --- SEARCH HOMES (BoldTrail IDX Integration) ---
 const searchAreas = [
   { name: "Parkland", range: "$700K – $5M+", tags: "Gated · Golf · Equestrian · Lakefront", icon: "🏡" },
@@ -1237,6 +1284,7 @@ const pageFiles = [
   { path: "/testimonials", file: "testimonials.html" },
   { path: "/contact", file: "contact.html" },
   { path: "/contact-thanks", file: "contact-thanks.html" },
+  { path: "/privacy", file: "privacy.html" },
   { path: "/search", file: "search.html" },
   { path: "/ru", file: "ru/index.html" },
 ];
