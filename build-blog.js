@@ -401,10 +401,42 @@ const blogIndex=`<!DOCTYPE html>
 <title>Blog | Alex Sverdlik | Parkland FL Real Estate Insights</title>
 <meta name="description" content="Expert insights on SE Florida real estate: relocation guides, market analysis, investment strategy, schools, community. By Alex Sverdlik, luxury broker.">
 <link rel="canonical" href="${SITE}/blog">
+
+<!-- Open Graph -->
 <meta property="og:title" content="Blog | Alex Sverdlik Real Estate">
 <meta property="og:description" content="Expert insights on Southeast Florida real estate.">
 <meta property="og:url" content="${SITE}/blog">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Alex Sverdlik - Luxury Real Estate">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog | Alex Sverdlik Real Estate">
+<meta name="twitter:description" content="Expert insights on Southeast Florida real estate.">
+
+<!-- Schema -->
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Southeast Florida Waterfront and Luxury Real Estate Blog",
+  "description": "Insights and guides on luxury and waterfront real estate in Southeast Florida — relocation, investment, neighborhoods, schools, and lifestyle. By Alex Sverdlik.",
+  "url": "${SITE}/blog",
+  "publisher": {
+    "@type": "Person",
+    "name": "Alex Sverdlik",
+    "url": "${SITE}"
+  },
+  "inLanguage": "en-US"
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "${SITE}"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "${SITE}/blog"}
+  ]
+}</script>
 <style>${CSS}${BCSS}</style>
 </head>
 <body>
