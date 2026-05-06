@@ -215,7 +215,7 @@ body:`<h1>Moving from New York to Parkland, Florida: The Complete 2026 Guide</h1
 <p>New York's combined state and city income tax can reach 14.7%. Florida: zero. For a family earning $500K, that's $60K+ annually. Over a decade, that's potentially $600K that stays in your pocket. <a href="/blog/florida-vs-new-york-taxes">See the detailed tax comparison →</a></p>
 <p>What $1.5M buys in <a href="/neighborhoods">Parkland</a> — 4,000+ sq ft with a pool in a gated community — would cost $3M+ in Westchester and significantly more in Manhattan.</p>
 <h2>Schools Are Better Than You Think</h2>
-<p>My own daughters attended <a href="/blog/best-private-schools-parkland">Pinecrest Academy</a> in Parkland and went on to Michigan Ross and UF pre-med. The private school landscape here rivals anywhere. <a href="/lifestyle">Learn more about Parkland schools →</a></p>
+<p>My own daughters attended <a href="/blog/best-private-schools-parkland">Pine Crest School</a> in Fort Lauderdale, about 30 minutes from Parkland, and went on to Michigan Ross and UF pre-med. The regional private school landscape rivals anywhere. <a href="/lifestyle">Learn more about Parkland schools →</a></p>
 <h2>Your Community Is Already Here</h2>
 <p>For observant Jewish families, Parkland offers <a href="/community">synagogues within walking distance</a>, eruv coverage, kosher dining, and Jewish day schools. <a href="/blog/kosher-community-parkland-boca-raton">Read the full community guide →</a></p>
 <h2>And Yes, the Food</h2>
@@ -236,18 +236,19 @@ body:`<h1>Florida vs New York Taxes: What Relocating Families Save in 2026</h1>
 <p>Annual tax savings often cover a significant portion of a luxury home's carrying costs. Your <a href="/neighborhoods">Parkland home</a> effectively costs much less than the sticker price. <a href="/investment">See our investment analysis approach →</a></p>
 <p><a href="/contact">Ready to run the numbers for your situation? Let's talk.</a></p>`},
 
-{slug:"best-private-schools-parkland",title:"Best Private Schools in Parkland FL (2026): A Parent's Guide",desc:"Honest guide to Parkland FL private schools: Pinecrest Academy, American Heritage, North Broward Prep. Written by a parent whose daughters attend top universities.",tag:"Schools",excerpt:"Two of my daughters attended Pinecrest and went on to Michigan Ross and UF pre-med. Here's what I know as a parent.",
-body:`<h1>Best Private Schools in Parkland FL: A Parent's Firsthand Guide</h1>
+{slug:"best-private-schools-parkland",title:"Best Private Schools for Parkland Families: A Parent's Guide",desc:"Honest guide to private schools accessible from Parkland, FL — Pine Crest School (Fort Lauderdale), American Heritage (Plantation/Delray Beach), North Broward Prep (Coconut Creek). By a parent whose daughters attend top universities.",tag:"Schools",excerpt:"Two of my daughters attended Pine Crest and went on to Michigan Ross and UF pre-med. Here's what I know as a parent.",
+body:`<h1>Best Private Schools for Parkland Families: A Parent's Firsthand Guide</h1>
 <div class="blog-meta"><span>February 20, 2026</span><span class="blog-tag">Schools</span><span>By Alex Sverdlik</span></div>
-<p>When families ask about schools, I don't pull up ratings. I tell them about my experience. Two of my daughters attended Pinecrest Academy in Parkland. One went to Michigan Ross. The other is in pre-med at UF. Our eldest attended high school in La Cañada, California and graduated from Princeton.</p>
-<h2>Pinecrest Academy</h2>
-<p>A tuition-free public charter school with private-school quality. Strong academics, involved parents, and a track record of placing students at top universities.</p>
+<p>When families ask about schools, I don't pull up ratings. I tell them about my experience. Two of my daughters attended Pine Crest School in Fort Lauderdale, about 30 minutes from Parkland. One went to Michigan Ross. The other is in pre-med at UF. Our eldest attended high school in La Cañada, California and graduated from Princeton.</p>
+<p>Parkland's own public schools are excellent — among the top-rated in Florida — and many local families choose them confidently. For families wanting private education, the surrounding region offers strong options within a 20-30 minute drive.</p>
+<h2>Pine Crest School</h2>
+<p>A respected private preparatory school in Fort Lauderdale, with strong academics, involved parents, and a track record of placing students at top universities.</p>
 <h2>American Heritage School</h2>
 <p>Private college-prep with campuses in Plantation and Delray Beach. Rigorous STEM focus. Consistently ranked among Florida's top private schools.</p>
 <h2>North Broward Preparatory</h2>
-<p>Part of the Nord Anglia network. Internationally-minded education with strong arts, athletics, and boarding options.</p>
+<p>In Coconut Creek, part of the Nord Anglia network. Internationally-minded education with strong arts, athletics, and boarding options.</p>
 <h2>Which Neighborhoods?</h2>
-<p><a href="/neighborhoods">Heron Bay and Watercress</a> offer excellent Pinecrest proximity. Families wanting American Heritage may prefer <a href="/neighborhoods">areas closer to Boca</a>. <a href="/contact">Let me match the right neighborhood to your school priorities.</a></p>`},
+<p>School commute distances vary across Parkland's neighborhoods. <a href="/neighborhoods">Heron Bay and Watercress</a> are reasonable for the Fort Lauderdale and Plantation drives. <a href="/contact">Let me match the right neighborhood to your school priorities.</a></p>`},
 
 {slug:"kosher-community-parkland-boca-raton",title:"Kosher Community Guide: Parkland, Boca Raton & Coral Springs FL",desc:"Jewish community Parkland FL: walking-distance shul, eruv, kosher restaurants, Jewish day schools. Guide for relocating families.",tag:"Community",excerpt:"For Shabbat-observant families relocating to SE Florida — the community is strong and growing.",
 body:`<h1>Kosher Community Guide: Parkland, Boca Raton &amp; Coral Springs</h1>

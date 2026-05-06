@@ -274,8 +274,8 @@ function nav(activePath, isRussian) {
   const links = [
     { href: "/", label: "Home", ru: "Главная" },
     { href: "/about", label: "About", ru: "Обо мне" },
-    { href: "/relocating-northeast", label: "Relocate NE", ru: "С северо-востока" },
-    { href: "/relocating-california", label: "Relocate CA", ru: "Из Калифорнии" },
+    { href: "/relocating-northeast", label: "From the Northeast", ru: "С северо-востока" },
+    { href: "/relocating-california", label: "From California", ru: "Из Калифорнии" },
     { href: "/neighborhoods", label: "Neighborhoods", ru: "Районы" },
     { href: "/waterfront", label: "Waterfront", ru: "На воде" },
     { href: "/lifestyle", label: "Lifestyle", ru: "Жизнь" },
@@ -341,7 +341,7 @@ function buildChatJS() {
   var PH_CLEAN = PHONE.replace(/[^0-9]/g, "");
   return '(function(){' +
   'var PH="' + PHONE + '";' +
-  'var SYS="You are Alex Sverdlik\'s AI assistant on his luxury real estate website. Help visitors learn about SE Florida real estate.\\n\\nABOUT ALEX: Broker Associate, ZenQuest Realty, Coral Springs FL. 20+ years. Smith Barney, Shipwire.com (Silicon Valley), top Zip Realty producer La Canada/LA. Fluent English/Russian. Wife Dr. Naomi Schechter, radiation oncologist Delray Beach. Daughters: Pinecrest to Michigan Ross, UF premed. Eldest to Princeton. Phone: ' + PHONE + '.\\n\\nAREAS: Parkland, Boca Raton, Coral Springs, Fort Lauderdale, Lighthouse Point, Hillsboro Mile, Deerfield Beach, Highland Beach.\\n\\nSPECIALTIES: Luxury $1M-$10M+, waterfront, NE and CA relocators, Russian-speaking, international investors, 1031 exchanges, medical pros.\\n\\nNEIGHBORHOODS: Heron Bay ($800K-$2.5M), MiraLago ($1.2M-$3.5M), Parkland Golf ($1.5M-$5M+), Watercress ($700K-$1.8M), BBB Ranches ($1.5M-$5M+), Hillsboro Mile ($5M-$25M+).\\n\\nCOMMUNITY: Walking-distance synagogues, eruv, kosher restaurants in Parkland/Boca/Coral Springs, Jewish day schools.\\n\\nBEHAVIOR: Warm, never pushy. 2-4 sentences. Russian if asked. Learn name, interest, timeline, budget naturally through conversation. Never invent listings.\\n\\nLEAD CAPTURE (CRITICAL): As soon as the visitor has shared their NAME and (EMAIL or PHONE), you MUST append a lead marker at the very end of that response, AFTER your normal reply. Do NOT filter by budget, timeline, or seeming seriousness — Alex wants ALL real leads, including lower price points, long timelines, and casual lookers. He has a referral network and partners for different price tiers. The ONLY reason to NOT emit the marker is if the person is obviously testing, joking, or a spammer (e.g. fake names, inappropriate content). If unsure, emit the marker — Alex would rather see it than miss it.\\n\\nMARKER FORMAT (EXACTLY): [LEAD:{\\"name\\":\\"...\\",\\"email\\":\\"...\\",\\"phone\\":\\"...\\",\\"interest\\":\\"...\\",\\"budget\\":\\"...\\",\\"timeline\\":\\"...\\",\\"location\\":\\"...\\",\\"buyerType\\":\\"...\\",\\"financial\\":\\"...\\",\\"lang\\":\\"English\\"}] — Use empty strings for fields you do not yet know. Emit the marker AT LEAST ONCE when name + contact first appear. You MAY emit it again in later turns if new details emerge (e.g. visitor shares budget mid-conversation) — the system handles duplicates cleanly. Put the marker on its own line after your normal reply. The visitor never sees it — it is stripped before display. Do not mention it. Do not wrap it in code blocks or quotes.";' +
+  'var SYS="You are Alex Sverdlik\'s AI assistant on his luxury real estate website. Help visitors learn about SE Florida real estate.\\n\\nABOUT ALEX: Broker Associate, ZenQuest Realty, Coral Springs FL. 20+ years. Smith Barney, Shipwire.com (Silicon Valley), top Zip Realty producer La Canada/LA. Fluent English/Russian. Wife Dr. Naomi Schechter, radiation oncologist Delray Beach. Daughters: Pine Crest to Michigan Ross, UF premed. Eldest to Princeton. Phone: ' + PHONE + '.\\n\\nAREAS: Parkland, Boca Raton, Coral Springs, Fort Lauderdale, Lighthouse Point, Hillsboro Mile, Deerfield Beach, Highland Beach.\\n\\nSPECIALTIES: Luxury $1M-$10M+, waterfront, NE and CA relocators, Russian-speaking, international investors, 1031 exchanges, medical pros.\\n\\nNEIGHBORHOODS: Heron Bay ($800K-$2.5M), MiraLago ($1.2M-$3.5M), Parkland Golf ($1.5M-$5M+), Watercress ($700K-$1.8M), BBB Ranches ($1.5M-$5M+), Hillsboro Mile ($5M-$25M+).\\n\\nCOMMUNITY: Walking-distance synagogues, eruv, kosher restaurants in Parkland/Boca/Coral Springs, Jewish day schools.\\n\\nBEHAVIOR: Warm, never pushy. 2-4 sentences. Russian if asked. Learn name, interest, timeline, budget naturally through conversation. Never invent listings.\\n\\nLEAD CAPTURE (CRITICAL): As soon as the visitor has shared their NAME and (EMAIL or PHONE), you MUST append a lead marker at the very end of that response, AFTER your normal reply. Do NOT filter by budget, timeline, or seeming seriousness — Alex wants ALL real leads, including lower price points, long timelines, and casual lookers. He has a referral network and partners for different price tiers. The ONLY reason to NOT emit the marker is if the person is obviously testing, joking, or a spammer (e.g. fake names, inappropriate content). If unsure, emit the marker — Alex would rather see it than miss it.\\n\\nMARKER FORMAT (EXACTLY): [LEAD:{\\"name\\":\\"...\\",\\"email\\":\\"...\\",\\"phone\\":\\"...\\",\\"interest\\":\\"...\\",\\"budget\\":\\"...\\",\\"timeline\\":\\"...\\",\\"location\\":\\"...\\",\\"buyerType\\":\\"...\\",\\"financial\\":\\"...\\",\\"lang\\":\\"English\\"}] — Use empty strings for fields you do not yet know. Emit the marker AT LEAST ONCE when name + contact first appear. You MAY emit it again in later turns if new details emerge (e.g. visitor shares budget mid-conversation) — the system handles duplicates cleanly. Put the marker on its own line after your normal reply. The visitor never sees it — it is stripped before display. Do not mention it. Do not wrap it in code blocks or quotes.";' +
   'var GREETING={r:"a",t:"Hi! I\'m Alex\'s assistant. Curious about Parkland, waterfront homes, or relocating to SE Florida? Ask me anything!"};' +
   'var msgs=[GREETING];' +
   'var open=false,busy=false;' +
@@ -724,7 +724,7 @@ PAGES.push(page({
         </div>
         <div>
           <p>From Wall Street to Silicon Valley to waterfront — Alex brings two decades of real estate expertise backed by a finance career at Smith Barney, five years as an early team member at tech startup Shipwire.com in Silicon Valley, and a track record as a top producer at Zip Realty in the La Cañada Flintridge and greater Los Angeles market.</p>
-          <p style="margin-top:18px">After living in Marin County and La Cañada Flintridge, Alex relocated his family to Parkland. Two of his daughters attended Pinecrest Academy here and went on to the University of Michigan Ross School of Business and pre-med at the University of Florida. His eldest, who attended high school in La Cañada, graduated from Princeton University.</p>
+          <p style="margin-top:18px">After living in Marin County and La Cañada Flintridge, Alex relocated his family to Parkland. Two of his daughters attended Pine Crest School in Fort Lauderdale, about 30 minutes from Parkland, and went on to the University of Michigan Ross School of Business and pre-med at the University of Florida. His eldest, who attended high school in La Cañada, graduated from Princeton University.</p>
           <p style="margin-top:18px">His wife, Dr. Naomi Schechter, is a practicing radiation oncologist in Delray Beach. Together, they've built a life in Parkland that reflects everything their clients are searching for — top-tier education, community, and quality of life.</p>
           <p style="margin-top:18px">Licensed Broker Associate with ZenQuest Realty, Alex speaks fluent Russian and English. He specializes in luxury properties from $1M to $10M+, serving relocating families from the Northeast and California, international buyers, and investors across Southeast Florida.</p>
           <div class="grid grid-2 cred-grid" style="margin-top:32px">
@@ -774,7 +774,7 @@ PAGES.push(page({
         </div>
         <div class="card">
           <h3 style="color:var(--navy);margin-bottom:12px">Schools That Deliver</h3>
-          <p>Alex's own daughters went from Pinecrest Academy to Michigan Ross and UF pre-med. The educational pipeline here produces results that rival any Northeast corridor.</p>
+          <p>Alex's own daughters went from Pine Crest School to Michigan Ross and UF pre-med. The educational pipeline here produces results that rival any Northeast corridor.</p>
         </div>
         <div class="card">
           <h3 style="color:var(--navy);margin-bottom:12px">Your Community Awaits</h3>
@@ -899,7 +899,7 @@ PAGES.push(page({
 // --- LIFESTYLE ---
 PAGES.push(page({
   title: "Parkland FL Lifestyle | Best Schools, Restaurants & Things to Do",
-  description: "Discover life in Parkland, Florida: top private schools (Pinecrest Academy, American Heritage), best bagels, pizza, kosher dining, parks, and family activities. A New Yorker's honest guide to Southeast Florida living.",
+  description: "Discover life in Parkland, Florida: top public schools, excellent private school options nearby (Pine Crest, American Heritage, North Broward Prep), best bagels, pizza, kosher dining, parks, and family activities. A New Yorker's honest guide to Southeast Florida living.",
   path: "/lifestyle",
   body: `
   <section class="section section-light" style="padding-top:140px">
@@ -910,7 +910,7 @@ PAGES.push(page({
 
       <div class="card card-gold" style="margin-top:48px">
         <h3 style="color:var(--navy);margin-bottom:10px">Education Excellence</h3>
-        <p>Pinecrest Academy, American Heritage, North Broward Prep — Parkland's private school landscape rivals anywhere in the country. Two of Alex's daughters attended Pinecrest and went on to the University of Michigan Ross School of Business and pre-med at the University of Florida.</p>
+        <p>Parkland's public schools are consistently among Florida's top-rated and are a primary draw for families relocating to the area. For families seeking private education, the surrounding region offers excellent options within a 20-30 minute drive — Pine Crest School in Fort Lauderdale, American Heritage in Plantation and Delray Beach, and North Broward Preparatory in Coconut Creek. Two of Alex's daughters attended Pine Crest, going on to the University of Michigan Ross School of Business and pre-med at the University of Florida.</p>
       </div>
 
       <h3 class="center" style="color:var(--navy);margin:48px 0 10px">Tastes Like Home</h3>
@@ -1026,6 +1026,9 @@ PAGES.push(page({
         <a href="${REVIEW_PROFILES.yelp}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Yelp</a> ·
         <a href="${REVIEW_PROFILES.fastExpert}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">FastExpert</a> ·
         <a href="${REVIEW_PROFILES.google}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Google</a>
+      </p>
+      <p class="center" style="margin-top:32px;font-size:12px;color:var(--wgray);max-width:680px;margin-left:auto;margin-right:auto;line-height:1.6;font-style:italic">
+        Individual results vary. Past sales reflect each client's specific situation, market conditions at the time, and property characteristics. Your experience may differ.
       </p>
     </div>
   </section>
