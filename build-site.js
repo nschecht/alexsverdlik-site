@@ -935,25 +935,33 @@ PAGES.push(page({
 
 // --- COMMUNITY ---
 PAGES.push(page({
-  title: "Jewish Community Parkland FL | Shul, Kosher Dining, Eruv & Schools",
-  description: "Parkland, Florida's Jewish community guide: synagogues within walking distance, eruv coverage, kosher restaurants and grocery stores, Jewish day schools, and welcoming congregations. Perfect for families relocating from the Northeast.",
+  title: "Community in Parkland FL | Faith, Family, Newcomers, Multi-Generational Living",
+  description: "Parkland, FL community guide: top public schools, family-strong neighborhoods, faith communities across denominations, newcomer connections, and active social life for relocating families.",
   path: "/community",
   body: `
   <section class="section section-grad" style="padding-top:140px">
     <div class="container center" style="max-width:800px">
-      <h1 class="cream">Community &amp; Faith</h1>
-      <p class="subtitle-dark center">Your values, your traditions, with space and sunshine</p>
+      <h1 class="cream">Community in Parkland</h1>
+      <p class="subtitle-dark center">Family-strong, transplant-friendly, multi-generational</p>
       <div class="divider center"></div>
-      <p class="subtitle-dark center" style="margin:32px auto 40px;max-width:650px">For families who keep Shabbat, maintain kosher homes, or simply want a strong Jewish community, Parkland and the surrounding area offer everything you need — without compromise.</p>
+      <p class="subtitle-dark center" style="margin:32px auto 48px;max-width:680px">Parkland's draw isn't a single defining feature — it's the way several strands of community life come together. Strong public schools anchor the town. Faith communities serve every observance level. Northeast and California transplants find each other quickly. Country club, equestrian, and waterfront lifestyles structure social life around shared interests.</p>
 
-      ${["Synagogues within walking distance in key neighborhoods", "Eruv coverage in multiple communities", "Kosher restaurants, bakeries, and grocery stores in Parkland, Boca, and Coral Springs", "Jewish day schools and youth programs", "Active and welcoming congregations across all denominations"].map(f => `
-      <div class="feature-row">
-        <span class="star">✦</span>
-        <p>${f}</p>
-      </div>`).join("")}
+      <div style="text-align:left;margin-top:48px">
+        <h3 class="cream" style="margin-bottom:12px">Schools &amp; Family</h3>
+        <p class="subtitle-dark" style="margin-bottom:32px">Parkland's public schools are consistently among Florida's top-rated and are a primary draw for relocating families. For families seeking private education, the surrounding region offers excellent options within a 20-30 minute drive — including Pine Crest School, American Heritage, and North Broward Preparatory.</p>
+
+        <h3 class="cream" style="margin-bottom:12px">Faith Communities</h3>
+        <p class="subtitle-dark" style="margin-bottom:32px">From Reform and Conservative synagogues to Chabad, from churches across Christian denominations to other faith traditions, Parkland-area families have meaningful options. Several neighborhoods offer walking-distance synagogue access for Shabbat-observant families, with active eruvim in select areas. Active and welcoming congregations support both deeply observant practice and cultural connection.</p>
+
+        <h3 class="cream" style="margin-bottom:12px">Newcomer Connections</h3>
+        <p class="subtitle-dark" style="margin-bottom:32px">Many of Parkland's residents are recent transplants from the Northeast or California — and they find each other quickly. The combination of newcomer-density and welcoming social fabric means relocating families settle in faster than they expect.</p>
+
+        <h3 class="cream" style="margin-bottom:12px">Active &amp; Social Life</h3>
+        <p class="subtitle-dark" style="margin-bottom:32px">Country clubs (Parkland Golf &amp; Country Club, Heron Bay), equestrian neighborhoods like BBB Ranches, waterfront communities along the canals and lakes, and a strong year-round outdoor culture mean community structures form naturally around shared interests, not just geography.</p>
+      </div>
     </div>
   </section>
-  ${ctaBlock("Find a Home Near Your Community", "Alex will match you with neighborhoods that fit your observance level and community needs.")}
+  ${ctaBlock("Find a Home That Fits Your Community", "Alex will match you with neighborhoods that align with your priorities — family, faith, lifestyle, or all of the above.")}
   `
 }));
 
