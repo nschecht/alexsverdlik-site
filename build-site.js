@@ -434,7 +434,7 @@ function buildChatJS() {
   // logged-and-swallowed; email path (caller's prior fetch) is unbreakable.
   'function postToCRM(ld){' +
   'try{' +
-  'fetch("https://alex-sverdlik-dashboard-v2.netlify.app/.netlify/functions/leads-public-create",{' +
+  'fetch("https://dashboard.alexsverdlik.com/.netlify/functions/leads-public-create",{' +
   'method:"POST",headers:{"Content-Type":"application/json"},' +
   'body:JSON.stringify(buildPublicLeadBody(ld)),keepalive:true' +
   '}).catch(function(e){console.error("CRM lead post failed (email path unaffected):",e);});' +
@@ -624,7 +624,7 @@ function renderFeaturedStack(featuredReviews, isRussian) {
 // At build time, fetch published reviews from the dashboard-v2 public endpoint.
 // Throws on any failure -> fails the build loudly (no silent empty /testimonials).
 async function fetchPublishedReviews() {
-  const url = "https://alex-sverdlik-dashboard-v2.netlify.app/.netlify/functions/reviews-public-list";
+  const url = "https://dashboard.alexsverdlik.com/.netlify/functions/reviews-public-list";
   const res = await fetch(url);
   if (!res.ok) throw new Error(`reviews-public-list returned HTTP ${res.status}`);
   const data = await res.json();
