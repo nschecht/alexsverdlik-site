@@ -40,26 +40,5 @@
     "version": 3,
     "createdAt": "2026-05-06T01:27:13.340Z",
     "updatedAt": "2026-05-07T13:15:45.592Z"
-  },
-  {
-    "slug": "canary-test-unpublish-flow-2026-05-07",
-    "title": "CANARY TEST] Unpublish flow verification 2026-05-07",
-    "body": "<h1>Canary Test: Publish/Unpublish Flow Verification — Parkland FL Blog</h1>\n\n<p>This is a canary test post created to verify the publish and unpublish flow for the ZenQuest Realty blog. It is not intended for public readership and should be deleted after verification is complete.</p>\n\n<h2>Test Marker One</h2>\n\n<p>If you are reading this post, the publish flow is functioning. This paragraph exists solely to provide renderable content for layout and CMS verification purposes.</p>\n\n<h2>Test Marker Two</h2>\n\n<p>This section confirms that H2 subheadings render correctly within the post template. No real estate content is contained in this post.</p>\n\n<h2>Test Marker Three</h2>\n\n<p>Internal link syntax check: <a href=\"/contact\">contact page</a>. If this link resolves correctly, internal linking is functioning as expected.</p>\n\n<p>If you have questions about this post or the verification process, reach out through the <a href=\"/contact\">contact page</a>.</p>",
-    "excerpt": "",
-    "metaDescription": "Canary test post for publish/unpublish flow verification. Not intended for public indexing. Parkland FL real estate blog by Alex Sverdlik.",
-    "category": "general",
-    "tag": "test",
-    "language": "en",
-    "images": [],
-    "id": "post_ffea1a8242a3cf49",
-    "status": "published",
-    "authorId": "user_3b74945f45c2b930",
-    "createdBy": "user_3b74945f45c2b930",
-    "lastEditedBy": "user_3b74945f45c2b930",
-    "publishedAt": "2026-05-07T14:08:27.434Z",
-    "publishedSha": null,
-    "version": 1,
-    "createdAt": "2026-05-07T14:08:15.514Z",
-    "updatedAt": "2026-05-07T14:08:15.514Z"
   }
 ]
