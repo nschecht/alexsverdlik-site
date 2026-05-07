@@ -344,8 +344,20 @@ body:`<h1>Buying Florida Real Estate as an International Buyer</h1>
 // ===== MERGE DASHBOARD POSTS =====
 // Dashboard posts override hardcoded posts with the same slug.
 // New dashboard posts are added to the front (newest first).
+//
+// Schema-adapter layer: dashboard-v2's posts-publish.mjs writes the Blobs
+// post object as-is (publishedAt ISO timestamp, metaDescription, lowercase
+// tag, body without meta-div). Hardcoded posts use the legacy public shape
+// (date as "Month D, YYYY", desc field, TitleCase tag, body with inline
+// meta-div). This block normalizes dashboard posts to the legacy shape so
+// downstream rendering doesn't have to branch.
+//
+// When/if multi-author lands (Phase brokerage activation), revisit author
+// resolution — today single-author site so "Alex Sverdlik" is correct.
 if(dashboardPosts.length>0){
   const hardcodedSlugs=new Set(posts.map(p=>p.slug));
+  const titleCase=s=>s?s[0].toUpperCase()+s.slice(1):s;
+  const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});}catch(e){return"";}};
   dashboardPosts.forEach(dp=>{
     // Ensure required fields
     if(!dp.slug||!dp.body)return;
@@ -353,7 +365,17 @@ if(dashboardPosts.length>0){
       const m=(dp.body||"").match(/<p>([\s\S]*?)<\/p>/);
       dp.excerpt=(m?m[1].replace(/<[^>]+>/g,"").trim():"").substring(0,180);
     }
-    if(!dp.desc)dp.desc=dp.excerpt;
+    // Field adapters: dashboard schema → public schema
+    if(!dp.desc)dp.desc=dp.metaDescription||dp.excerpt;
+    if(!dp.date&&dp.publishedAt)dp.date=fmtDate(dp.publishedAt);
+    if(dp.tag)dp.tag=titleCase(dp.tag);
+    // Inject meta-div into body if absent (hardcoded posts have it inline;
+    // dashboard posts don't, since OLD client-side preparePosts injection
+    // was deleted in dashboard-v2 commit 38ea8bb / Phase 2.5 cutover).
+    if(dp.body&&!dp.body.includes("blog-meta")){
+      const metaDiv=`\n<div class="blog-meta"><span>${dp.date||""}</span><span class="blog-tag">${dp.tag||""}</span><span>By Alex Sverdlik</span></div>`;
+      dp.body=dp.body.replace(/(<\/h1>)/i,"$1"+metaDiv);
+    }
     if(hardcodedSlugs.has(dp.slug)){
       // Replace hardcoded version
       const idx=posts.findIndex(p=>p.slug===dp.slug);
