@@ -357,6 +357,21 @@ body:`<h1>Buying Florida Real Estate as an International Buyer</h1>
 if(dashboardPosts.length>0){
   const hardcodedSlugs=new Set(posts.map(p=>p.slug));
   const titleCase=s=>s?s[0].toUpperCase()+s.slice(1):s;
+
+  // MIRROR of dashboard-v2 CATEGORIES constant. Revisit when categories list grows or multi-author lands.
+  const CATEGORIES_MAP={
+    food:"Tastes Like Home",
+    neighborhood:"Neighborhood Stories",
+    money:"Smart Money",
+    schools:"Schools & Family",
+    community:"Community & Faith",
+    waterfront:"Waterfront Life",
+    relocate:"Why Florida",
+    market:"Market Updates",
+    lifestyle:"Florida Living",
+    investment:"The Long View",
+    general:"Stories & Notes",
+  };
   const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});}catch(e){return"";}};
   dashboardPosts.forEach(dp=>{
     // Ensure required fields
@@ -368,7 +383,11 @@ if(dashboardPosts.length>0){
     // Field adapters: dashboard schema → public schema
     if(!dp.desc)dp.desc=dp.metaDescription||dp.excerpt;
     if(!dp.date&&dp.publishedAt)dp.date=fmtDate(dp.publishedAt);
-    if(dp.tag)dp.tag=titleCase(dp.tag);
+    // Option C: tag wins when deliberately different from category (AI's SEO-precision case),
+    // CATEGORIES_MAP for branded display when tag === category, titleCase fallback for unknown ids.
+    dp.tag = (dp.tag && dp.tag !== dp.category)
+      ? titleCase(dp.tag)
+      : (CATEGORIES_MAP[dp.category] || titleCase(dp.tag || dp.category));
     // Inject meta-div into body if absent (hardcoded posts have it inline;
     // dashboard posts don't, since OLD client-side preparePosts injection
     // was deleted in dashboard-v2 commit 38ea8bb / Phase 2.5 cutover).
