@@ -268,7 +268,7 @@ body:`<h1>Kosher Community Guide: Parkland, Boca Raton &amp; Coral Springs</h1>
 body:`<h1>Waterfront Homes in Southeast Florida: Complete Guide</h1>
 <div class="blog-meta"><span>January 28, 2026</span><span class="blog-tag">Waterfront</span><span>By Alex Sverdlik</span></div>
 <p>Southeast Florida offers waterfront at every price point. Whether lakefront for family paddleboarding, deep-water Intracoastal for yachts, or direct oceanfront — the options are remarkable.</p>
-<h2>Lakefront &amp; Canal: $1M–$3.5M</h2>
+<h2>Lakefront: $1M–$3.5M</h2>
 <p><a href="/neighborhoods">Parkland communities</a> like Heron Bay and MiraLago combine water views with top schools and gated security.</p>
 <h2>Intracoastal: $2M–$8M</h2>
 <p>Boca Raton, Lighthouse Point, and Fort Lauderdale deliver deep-water lots, serious boat access, and coastal culture.</p>

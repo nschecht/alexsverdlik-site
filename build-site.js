@@ -879,7 +879,7 @@ PAGES.push(page({
       <div class="divider center"></div>
       <div class="grid grid-3" style="margin-top:48px;text-align:left">
         ${[
-          { type: "Lakefront &amp; Canal", area: "Parkland · Coral Springs", range: "$1M – $3.5M", desc: "Peaceful water views, private docks, and family-friendly communities with top schools nearby." },
+          { type: "Lakefront", area: "Parkland · Coral Springs", range: "$1M – $3.5M", desc: "Peaceful water views, private docks, and family-friendly communities with top schools nearby." },
           { type: "Intracoastal", area: "Boca Raton · Lighthouse Point · Fort Lauderdale", range: "$2M – $8M", desc: "Deep-water access, yacht docking, and coastal living minutes from dining and culture." },
           { type: "Oceanfront", area: "Hillsboro Mile · Deerfield · Highland Beach", range: "$5M – $25M+", desc: "Direct Atlantic frontage. Private beaches. The pinnacle of Southeast Florida luxury." },
         ].map(w => `
@@ -957,7 +957,7 @@ PAGES.push(page({
         <p class="subtitle-dark" style="margin-bottom:32px">Many of Parkland's residents are recent transplants from the Northeast or California — and they find each other quickly. The combination of newcomer-density and welcoming social fabric means relocating families settle in faster than they expect.</p>
 
         <h3 class="cream" style="margin-bottom:12px">Active &amp; Social Life</h3>
-        <p class="subtitle-dark" style="margin-bottom:32px">Country clubs (Parkland Golf &amp; Country Club, Heron Bay), equestrian neighborhoods like BBB Ranches, waterfront communities along the canals and lakes, and a strong year-round outdoor culture mean community structures form naturally around shared interests, not just geography.</p>
+        <p class="subtitle-dark" style="margin-bottom:32px">Country clubs (Parkland Golf &amp; Country Club, Heron Bay), equestrian neighborhoods like BBB Ranches, lakefront communities, and a strong year-round outdoor culture mean community structures form naturally around shared interests, not just geography.</p>
       </div>
     </div>
   </section>
