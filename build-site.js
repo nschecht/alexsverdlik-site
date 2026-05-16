@@ -1280,7 +1280,6 @@ function ensureDir(dir) {
 }
 
 ensureDir(OUT);
-ensureDir(OUT + "/ru");
 
 const pageFiles = [
   { path: "/", file: "index.html" },
@@ -1297,7 +1296,6 @@ const pageFiles = [
   { path: "/contact-thanks", file: "contact-thanks.html" },
   { path: "/privacy", file: "privacy.html" },
   { path: "/search", file: "search.html" },
-  { path: "/ru", file: "ru/index.html" },
 ];
 
 PAGES.forEach((html, i) => {
