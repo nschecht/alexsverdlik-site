@@ -1323,7 +1323,7 @@ const redirects301 = "/client-stories    /testimonials    301!\n";
 const redir = redirects301 + pageFiles
   .filter(f => f.path !== "/" && f.path !== "/ru")
   .map(f => `${f.path}    /${f.file}    200`)
-  .join("\n") + "\n/ru    /ru/index.html    200\n";
+  .join("\n") + "\n";
 fs.writeFileSync(path.join(OUT, "_redirects"), redir);
 console.log("✓ _redirects");
 
