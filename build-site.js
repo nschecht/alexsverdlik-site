@@ -669,7 +669,7 @@ PAGES.push(page({
   <section class="section section-light">
     <div class="container center">
       <h2>Why Work with Alex?</h2>
-      <p class="subtitle center">Smith Barney finance veteran. Silicon Valley startup pioneer. Top-producing California realtor. Now Southeast Florida's most qualified luxury broker.</p>
+      <p class="subtitle center">Smith Barney finance veteran. Silicon Valley startup pioneer. Top-producing California realtor. Now serving Southeast Florida's luxury market.</p>
       <div class="divider center"></div>
       <div class="grid grid-4" style="margin-top:48px;text-align:left">
         <div class="card">
