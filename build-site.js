@@ -656,7 +656,7 @@ PAGES.push(page({
       <p class="hero-sub">Luxury homes, waterfront estates, and smart investments — guided by 20 years of expertise and a finance-first approach.</p>
       <div class="hero-btns">
         <a href="/contact" class="btn btn-gold">Discover Your Next Home</a>
-        <a href="/ru" class="btn btn-outline">По-русски</a>
+        <a href="/contact" class="btn btn-outline">Schedule a Consultation</a>
       </div>
       <div class="paths">
         <a href="/relocating-northeast" class="path-card"><span class="gold">✦</span> Relocating from the Northeast</a>
