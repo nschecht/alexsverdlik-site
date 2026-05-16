@@ -286,7 +286,7 @@ function nav(activePath, isRussian) {
     { href: "/search", label: "Search Homes", ru: "Поиск" },
     { href: "/contact", label: "Contact", ru: "Контакт" },
   ];
-  const langLink = isRussian ? `<a href="/" class="nav-lang">EN</a>` : `<a href="/ru" class="nav-lang">RU</a>`;
+  const langLink = "";
   return `
   <nav class="nav" id="navbar">
     <div class="nav-inner">
