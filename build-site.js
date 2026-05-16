@@ -987,7 +987,7 @@ PAGES.push(page({
         </div>
         <div class="card card-gold">
           <h3 style="color:var(--navy);margin-bottom:10px">International Buyers</h3>
-          <p>Purchasing as a non-citizen, LLC structures, tax implications, EB-5 connections, and property management for non-residents. Fluent in Russian for seamless communication.</p>
+          <p>Purchasing as a non-citizen, LLC structures, tax implications, EB-5 connections, and property management for non-residents.</p>
         </div>
         <div class="card card-gold">
           <h3 style="color:var(--navy);margin-bottom:10px">Portfolio Diversification</h3>
