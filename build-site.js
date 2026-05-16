@@ -234,7 +234,7 @@ function buildAgentSchema(locale) {
     "url": SITE,
     // image removed — referenced asset doesn't exist; re-add when a real
     // portrait + 1200x630 OG image are commissioned (BUILD-LOG carry-forward).
-    "description": "Luxury real estate broker in Parkland, FL specializing in $1M+ luxury properties, waterfront estates, and relocation from the Northeast and California. Bilingual English/Russian.",
+    "description": "Luxury real estate broker in Parkland, FL specializing in $1M+ luxury properties, waterfront estates, and relocation from the Northeast and California. Wall Street finance background and 20+ years of experience.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "1750 N University Dr., #201",
@@ -646,7 +646,7 @@ const PAGES = [];
 // --- HOMEPAGE ---
 PAGES.push(page({
   title: "Alex Sverdlik | Luxury Real Estate in Parkland & Southeast Florida",
-  description: "Luxury homes, waterfront estates, and smart real estate investments in Parkland, Boca Raton, and Southeast Florida. Bilingual English/Russian broker with 20+ years experience, finance background, and top producer track record.",
+  description: "Luxury real estate in Parkland, Boca Raton, and Southeast Florida. 20+ years guiding high-net-worth buyers across oceanfront, intracoastal, and estate properties.",
   path: "/",
   body: `
   <section class="hero">
@@ -704,7 +704,7 @@ PAGES.push(page({
 // --- ABOUT ---
 PAGES.push(page({
   title: "About Alex Sverdlik | Luxury Realtor Parkland FL | Broker Associate",
-  description: "Meet Alex Sverdlik — broker associate at ZenQuest Realty with 20+ years experience. Finance background (Smith Barney), Silicon Valley startup veteran (Shipwire.com), top Zip Realty producer in LA. Bilingual English/Russian. Serving Parkland, Boca Raton, and SE Florida.",
+  description: "Meet Alex Sverdlik — broker associate at ZenQuest Realty with 20+ years experience. Finance background (Smith Barney), Silicon Valley startup veteran (Shipwire.com), top Zip Realty producer in LA. Serving Parkland, Boca Raton, and SE Florida.",
   path: "/about",
   body: `
   <section class="section section-light" style="padding-top:140px">
