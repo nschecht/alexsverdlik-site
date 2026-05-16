@@ -17,3 +17,15 @@
   to = "/testimonials"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/ru"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ru/*"
+  to = "/"
+  status = 301
+  force = true
