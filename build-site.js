@@ -681,8 +681,8 @@ PAGES.push(page({
           <p>NYC roots, Silicon Valley career, LA real estate success, now raising his family in Parkland. He's lived every relocation path his clients take.</p>
         </div>
         <div class="card">
-          <h4 style="color:var(--navy);margin-bottom:10px">Bilingual &amp; International</h4>
-          <p>Fluent in Russian and English. Experienced with international buyers, foreign investment structures, and cross-border transactions.</p>
+          <h4 style="color:var(--navy);margin-bottom:10px">Tax &amp; Relocation Expert</h4>
+          <p>Twenty years guiding luxury buyers through NY, NJ, and California relocations to Florida. Save Our Homes, residency-establishment, snowbird rules, no-state-income-tax mechanics — explained at the level a sophisticated buyer actually needs.</p>
         </div>
         <div class="card">
           <h4 style="color:var(--navy);margin-bottom:10px">Waterfront &amp; Estate Specialist</h4>
