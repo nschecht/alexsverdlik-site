@@ -150,7 +150,7 @@ p{font-size:clamp(15px,1.6vw,17px);line-height:1.8;font-weight:300}
 .path-card:hover{border-color:var(--gold);background:rgba(201,169,110,.06)}
 
 /* About photo placeholder */
-.about-photo{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--navy),var(--char));border-radius:5px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,169,110,.18);position:relative;overflow:hidden;text-align:center}
+.about-photo{width:100%;aspect-ratio:4/5;background:linear-gradient(135deg,var(--navy),var(--char));border-radius:5px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,169,110,.18);position:relative;overflow:hidden;text-align:center}
 .about-photo .initials{font-family:var(--fd);font-size:clamp(48px,8vw,64px);color:var(--gold)}
 .about-photo .label{font-size:11px;color:var(--wgray);letter-spacing:3px;margin-top:10px;text-transform:uppercase}
 
@@ -713,13 +713,7 @@ PAGES.push(page({
       <div class="divider center"></div>
       <div class="grid grid-about" style="margin-top:48px">
         <div>
-          <div class="about-photo">
-            <div style="z-index:1">
-              <div class="initials">AS</div>
-              <div class="label">Broker Associate</div>
-              <div class="label" style="margin-top:3px">ZenQuest Realty</div>
-            </div>
-          </div>
+          <img class="about-photo" src="/assets/alex-headshot-offwhite-4x5.jpg" alt="Alex Sverdlik, Broker Associate at ZenQuest Realty" loading="lazy" width="1200" height="1500">
           <p style="text-align:center;margin-top:14px;font-size:14px;color:var(--slate)">📞 ${PHONE}</p>
         </div>
         <div>
