@@ -105,7 +105,34 @@ const scriptHTML=idx.match(/<script>[\s\S]*?<\/script>/)?.[0]||"";
 // Blog link is now present in main nav via build-site.js, so reuse navHTML directly.
 const navWithBlog=navHTML;
 
-function blogPage(title,desc,slug,body,schemas=""){
+// Extract first <img src="..."> from post body HTML. Returns "" if none found.
+function getFirstImageFromBody(body) {
+  if (!body) return "";
+  const m = body.match(/<img[^>]+src="([^"]+)"/i);
+  return m ? m[1] : "";
+}
+
+// Build Article JSON-LD with two-tier image fallback (featuredImage → first body image → portrait)
+// plus optional articleSection + keywords. author.url links to /about for Knowledge Graph entity linking.
+function buildArticleSchema(title, slug, articleSection, keywords, featuredImage, body) {
+  const bodyImage = getFirstImageFromBody(body);
+  const imageUrl = featuredImage || bodyImage || `${SITE}/assets/alex-headshot-square.jpg`;
+  const absoluteImageUrl = imageUrl.startsWith("http") ? imageUrl : `${SITE}${imageUrl}`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    image: absoluteImageUrl,
+    author: { "@type": "Person", name: "Alex Sverdlik", url: `${SITE}/about` },
+    publisher: { "@type": "Organization", name: "Alex Sverdlik Real Estate" },
+    url: `${SITE}/blog/${slug}`,
+  };
+  if (articleSection) schema.articleSection = articleSection;
+  if (keywords) schema.keywords = keywords;
+  return JSON.stringify(schema);
+}
+
+function blogPage(title,desc,slug,body,schemas="",articleSection="",keywords="",featuredImage=""){
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,7 +159,7 @@ function blogPage(title,desc,slug,body,schemas=""){
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Alex Sverdlik Real Estate">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${title.replace(/"/g,'\\"')}","author":{"@type":"Person","name":"Alex Sverdlik"},"publisher":{"@type":"Organization","name":"Alex Sverdlik Real Estate"},"url":"${SITE}/blog/${slug}"}</script>
+<script type="application/ld+json">${buildArticleSchema(title, slug, articleSection, keywords, featuredImage, body)}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"${SITE}/"},{"@type":"ListItem","position":2,"name":"Blog","item":"${SITE}/blog"},{"@type":"ListItem","position":3,"name":"${title.split(':')[0].replace(/"/g,'\\"')}"}]}</script>
 ${schemas}
 <style>${CSS}${BCSS}</style>
@@ -506,7 +533,7 @@ fs.writeFileSync(`${OUT}/blog/index.html`,blogIndex);
 console.log("✓ blog/index.html");
 
 posts.forEach(p=>{
-  fs.writeFileSync(`${OUT}/blog/${p.slug}.html`,blogPage(p.title,p.desc,p.slug,p.body));
+  fs.writeFileSync(`${OUT}/blog/${p.slug}.html`,blogPage(p.title,p.desc,p.slug,p.body,"",p.tag||"",p.tag||"",p.featuredImage||""));
   console.log(`✓ blog/${p.slug}.html`);
 });
 
