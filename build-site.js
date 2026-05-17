@@ -229,12 +229,12 @@ function buildAgentSchema(locale) {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     "name": "Alex Sverdlik",
+    "image": `${SITE}/assets/alex-headshot-square.jpg`,
+    "priceRange": "$$$$",
     "telephone": "+16266443476",
     "email": CONFIG.email,
     "url": SITE,
-    // image removed — referenced asset doesn't exist; re-add when a real
-    // portrait + 1200x630 OG image are commissioned (BUILD-LOG carry-forward).
-    "description": "Luxury real estate broker in Parkland, FL specializing in $1M+ luxury properties, waterfront estates, and relocation from the Northeast and California. Wall Street finance background and 20+ years of experience.",
+    "description": "Luxury real estate broker serving Parkland, Boca Raton, and Southeast Florida from ZenQuest Realty in Coral Springs. Top producer at Zip Realty (Marin County) and eXp Realty Florida (2025). Specializing in the $2M-$10M+ luxury tier across oceanfront, intracoastal, and gated estate properties. Wall Street background (Smith Barney VP Investments) and 20+ years of experience.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "1750 N University Dr., #201",
@@ -254,11 +254,31 @@ function buildAgentSchema(locale) {
     ],
     "knowsLanguage": ["en", "ru"],
     "inLanguage": locale,
+    "knowsAbout": [
+      "Luxury real estate",
+      "Waterfront properties",
+      "Intracoastal properties",
+      "Gated community estates",
+      "Relocation from Northeast United States",
+      "Relocation from California",
+      "Russian-speaking clients",
+      "Real estate investment"
+    ],
     "hasCredential": {
       "@type": "EducationalOccupationalCredential",
       "credentialCategory": "Real Estate Broker License",
       "recognizedBy": { "@type": "Organization", "name": "Florida DBPR" }
     },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Baruch College",
+      "sameAs": "https://en.wikipedia.org/wiki/Baruch_College"
+    },
+    "award": [
+      "Top Producer, Zip Realty (Marin County, California)",
+      "Top Producer, Markarian Realty (La Cañada Flintridge, California)",
+      "Top Producer, eXp Realty Florida (2025)"
+    ],
     "worksFor": { "@type": "RealEstateOrganization", "name": "ZenQuest Realty" },
     "sameAs": [
       REVIEW_PROFILES.zillow,
