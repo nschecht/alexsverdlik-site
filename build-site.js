@@ -1277,6 +1277,9 @@ function ensureDir(dir) {
 
 ensureDir(OUT);
 
+// Copy static assets (headshots, logos, etc.) from repo /assets/ into the publish dir.
+fs.cpSync(path.join(__dirname, "assets"), path.join(OUT, "assets"), { recursive: true });
+
 const pageFiles = [
   { path: "/", file: "index.html" },
   { path: "/about", file: "about.html" },
