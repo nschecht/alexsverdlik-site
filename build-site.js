@@ -704,7 +704,7 @@ PAGES.push(page({
 // --- ABOUT ---
 PAGES.push(page({
   title: "About Alex Sverdlik | Luxury Realtor Parkland FL | Broker Associate",
-  description: "Meet Alex Sverdlik — broker associate at ZenQuest Realty with 20+ years experience. Finance background (Smith Barney), Silicon Valley startup veteran (Shipwire.com), top Zip Realty producer in LA. Serving Parkland, Boca Raton, and SE Florida.",
+  description: "Top producer at Zip Realty Marin and eXp Realty Florida (2025). Wall Street and Silicon Valley background. Now ZenQuest Realty, serving Parkland and Boca Raton.",
   path: "/about",
   body: `
   <section class="section section-light" style="padding-top:140px">
