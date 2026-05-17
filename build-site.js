@@ -820,7 +820,7 @@ PAGES.push(page({
         </div>
         <div class="card">
           <h3 style="color:var(--navy);margin-bottom:12px">Alex Knows Both Markets</h3>
-          <p>As a top Zip Realty producer in La Cañada Flintridge and the greater LA market, Alex understands exactly what you're leaving — and what you're gaining.</p>
+          <p>As a top producer at Zip Realty in Marin County and at Markarian Realty in La Cañada Flintridge, Alex understands the California markets you're leaving — Bay Area and LA foothills alike — and exactly what you're gaining.</p>
         </div>
         <div class="card">
           <h3 style="color:var(--navy);margin-bottom:12px">Silicon Valley to Sunshine</h3>
